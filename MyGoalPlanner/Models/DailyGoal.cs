@@ -14,5 +14,8 @@ namespace MyGoalPlanner.Models
         public bool Finished { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime DateEnd { get; set; }
+
+        //changed
+        public string Type { get; set; }
     }
 }
