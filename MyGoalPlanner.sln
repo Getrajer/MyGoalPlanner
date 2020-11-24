@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGoalPlanner", "MyGoalPlanner\MyGoalPlanner.csproj", "{07367624-C8B5-4AB0-8052-3F31290698ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibary", "DataAccessLibary\DataAccessLibary.csproj", "{3210646A-266E-4341-B022-3700A2FBCCF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLibary", "DataAccessLibary\DataAccessLibary.csproj", "{3210646A-266E-4341-B022-3700A2FBCCF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

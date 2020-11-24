@@ -13,9 +13,19 @@ namespace MyGoalPlanner.CodeBase
         //Parameters
         [Parameter] public bool LoaderAdd { get; set; } = false;
 
+        //Toggle variables
+        public bool HasToggleItems { get; set; }
+
+        //Button Texts
+        protected string ToggleAddingItemsBtnTxt = " ";
 
         //Input Fields
         public string GoalNameInput { get; set; }
+
+
+
+        //Test data
+        protected List<string> goalType = new List<string>();
 
 
         protected List<Goal> goals = new List<Goal>();
@@ -46,8 +56,27 @@ namespace MyGoalPlanner.CodeBase
                 newGoal.Name = GoalNameInput;
                 goals.Add(newGoal);
             }
+        }
 
-            
+
+
+        public async Task ToggleAddingItems()
+        {
+            if (HasToggleItems)
+            {
+                HasToggleItems = false;
+                ToggleAddingItemsBtnTxt = "\t";
+            }
+            else
+            {
+                HasToggleItems = true;
+                ToggleAddingItemsBtnTxt = "✓";
+            }
+        }
+
+        public async Task AddGoalItem()
+        {
+
         }
 
     }

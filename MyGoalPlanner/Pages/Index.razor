@@ -16,6 +16,10 @@
         <input @bind="GoalNameInput" />
         <button @onclick="@(async () => await CreateGoal())">Add</button>
     </div>
+
+    <div>
+        <button style="width: 30px; height: 30px" @onclick="ToggleAddingItems">@ToggleAddingItemsBtnTxt</button>
+    </div>
 }
 else
 {
