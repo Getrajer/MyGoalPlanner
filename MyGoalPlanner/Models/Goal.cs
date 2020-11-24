@@ -5,17 +5,16 @@ using System.Threading.Tasks;
 
 namespace MyGoalPlanner.Models
 {
-    public class DailyGoal
+    public class Goal
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool Finished { get; set; }
-        public DateTime DateOfStart { get; set; }
-        public DateTime DateEnd { get; set; }
+        public DateTime TimeStart { get; set; }
+        public DateTime TimeEnd { get; set; }
 
-        //changed
-        public string Type { get; set; }
+        public bool HasListOfSteps { get; set; }
+
     }
 }
