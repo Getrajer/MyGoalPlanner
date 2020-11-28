@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLibary;
+using DataAccessLibary.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +29,8 @@ namespace MyGoalPlanner
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<ISQLGoal, SQLGoal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
