@@ -7,6 +7,7 @@ namespace MyGoalPlanner.Models.Models
 {
     public class Step
     {
+        public int Id { get; set; }
         public int StepNumber { get; set; }
         [StringLength(200)]
         public string StepName { get; set; }
