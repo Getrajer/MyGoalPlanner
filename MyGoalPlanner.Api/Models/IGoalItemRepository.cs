@@ -10,7 +10,7 @@ namespace MyGoalPlanner.Api.Models
     {
         Task<IEnumerable<GoalItem>> GetAllGoalItems();
         Task<GoalItem> GetGoalItem(int goalItemId);
-        Task<GoalItem> AddMotivator(GoalItem goalItem);
+        Task<GoalItem> AddGoalItem(GoalItem goalItem);
         Task<GoalItem> UpdateGoalItem(GoalItem goalItem);
         void DeleteGoalItem(int goalItemId);
     }
