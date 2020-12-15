@@ -20,7 +20,7 @@ namespace MyGoalPlanner.Api.Models
         public DbSet<Note> Notes { get; set; }
         public DbSet<Motivator> Motivators { get; set; }
         public DbSet<GoalItem> GoalItems { get; set; }
-        public DbSet<GoalContition> GoalContitions { get; set; }
+        public DbSet<GoalCondition> GoalContitions { get; set; }
         public DbSet<Goal> Goals { get; set; }
         public DbSet<FontAwesomeIcon> FontAwesomeIcons { get; set; }
         public DbSet<File> Files { get; set; }
