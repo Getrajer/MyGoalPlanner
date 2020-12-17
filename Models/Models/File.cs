@@ -7,7 +7,7 @@ namespace MyGoalPlanner.Models.Models
 {
     public class File
     {
-        public int Id { get; set; }
+        public int FileId { get; set; }
 
         [StringLength(200)]
         public string Path { get; set; }

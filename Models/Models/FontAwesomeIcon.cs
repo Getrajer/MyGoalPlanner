@@ -8,7 +8,7 @@ namespace MyGoalPlanner.Models
 {
     public class FontAwesomeIcon
     {
-        public int Id { get; set; }
+        public int FontAwesomeIconId { get; set; }
 
         [StringLength(30)]
         public string IconName { get; set; }

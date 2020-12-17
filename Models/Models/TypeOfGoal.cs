@@ -8,7 +8,7 @@ namespace MyGoalPlanner.Models
 {
     public class TypeOfGoal
     {
-        public int Id { get; set; }
+        public int TypeOfGoalId { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
     }

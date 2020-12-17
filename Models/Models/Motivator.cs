@@ -7,7 +7,7 @@ namespace MyGoalPlanner.Models.Models
 {
     public class Motivator
     {
-        public int Id { get; set; }
+        public int MotivatorId { get; set; }
         [StringLength(100)]
         public string MotivatorName { get; set; }
         [StringLength(300)]

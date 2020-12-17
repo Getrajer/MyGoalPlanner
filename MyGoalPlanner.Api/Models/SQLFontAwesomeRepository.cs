@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,25 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLFontAwesomeRepository : IFontAwesomeRepository
     {
-        public Task<FontAwesomeIcon> AddFontAwesomeIcon(FontAwesomeIcon fontAwesomeIcon)
+        private readonly AppDbContext appDbContext;
+
+        public SQLFontAwesomeRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteFontAwesomeIcon(int fontAwesomeIconId)
+
+        public async Task<FontAwesomeIcon> AddFontAwesomeIcon(FontAwesomeIcon fontAwesomeIcon)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.FontAwesomeIcons.AddAsync(fontAwesomeIcon);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async void DeleteFontAwesomeIcon(int fontAwesomeIconId)
+        {
+            var result = await appDbContext.FontAwesomeIcons
+                .FirstOrDefaultAsync(e => e.FontAwesomeIconId == fontAwesomeIconId);
         }
 
         public Task<IEnumerable<FontAwesomeIcon>> GetAllFontAwesomeIcons()

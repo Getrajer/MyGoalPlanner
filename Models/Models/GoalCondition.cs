@@ -6,7 +6,7 @@ namespace MyGoalPlanner.Models.Models
 {
     public class GoalCondition
     {
-        public int Id { get; set; }
+        public int GoalConditionId { get; set; }
 
         public int ConditionCount { get; set; }
 

@@ -7,7 +7,7 @@ namespace MyGoalPlanner.Models.Models
 {
     public class Note
     {
-        public int Id { get; set; }
+        public int NoteId { get; set; }
 
         [StringLength(5000)]
         public string NoteText { get; set; }
