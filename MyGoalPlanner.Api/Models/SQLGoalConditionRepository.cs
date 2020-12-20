@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,59 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLGoalConditionRepository : IGoalConditionRepository
     {
-        public Task<GoalCondition> AddGoalCondition(GoalCondition goalCondition)
+
+        private readonly AppDbContext appDbContext;
+
+        public SQLGoalConditionRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteGoalCondition(int goalConditionId)
+        public async Task<GoalCondition> AddGoalCondition(GoalCondition goalCondition)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.GoalContitions.AddAsync(goalCondition);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<IEnumerable<GoalCondition>> GetAllGoalConditions()
+        public async void DeleteGoalCondition(int goalConditionId)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.GoalContitions
+                .FirstOrDefaultAsync(e => e.GoalConditionId == goalConditionId);
+
+            if(result != null)
+            {
+                appDbContext.GoalContitions.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<GoalCondition> GetGoalCondition(int goalConditionId)
+        public async Task<IEnumerable<GoalCondition>> GetAllGoalConditions()
         {
-            throw new NotImplementedException();
+            return await appDbContext.GoalContitions.ToListAsync();
         }
 
-        public Task<GoalCondition> UpdateGoalCondition(GoalCondition goalCondition)
+        public async Task<GoalCondition> GetGoalCondition(int goalConditionId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.GoalContitions
+                .FirstOrDefaultAsync(e => e.GoalConditionId == goalConditionId);
+        }
+
+        public async Task<GoalCondition> UpdateGoalCondition(GoalCondition goalCondition)
+        {
+            var result = await appDbContext.GoalContitions
+                .FirstOrDefaultAsync(e => e.GoalConditionId == goalCondition.GoalConditionId);
+
+            if(result != null)
+            {
+                result.ConditionCount = goalCondition.ConditionCount;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }

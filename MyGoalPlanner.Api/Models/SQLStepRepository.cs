@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,60 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLStepRepository : IStepRepostitory
     {
-        public Task<Step> AddStep(Step step)
+        private readonly AppDbContext appDbContext;
+
+        public SQLStepRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteStep(int stepId)
+        public async Task<Step> AddStep(Step step)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Steps.AddAsync(step);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<IEnumerable<Step>> GetAllSteps()
+        public async void DeleteStep(int stepId)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Steps
+                .FirstOrDefaultAsync(e => e.StepId == stepId);
+
+            if(result != null)
+            {
+                appDbContext.Steps.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<Step> GetStep(int stepId)
+        public async Task<IEnumerable<Step>> GetAllSteps()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Steps.ToListAsync();
         }
 
-        public Task<Step> UpdateStep(Step step)
+        public async Task<Step> GetStep(int stepId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Steps
+                .FirstOrDefaultAsync(e => e.StepId == stepId);
+
+        }
+
+        public async Task<Step> UpdateStep(Step step)
+        {
+            var result = await appDbContext.Steps
+                .FirstOrDefaultAsync(e => e.StepId == step.StepId);
+
+            if(result != null)
+            {
+                result.StepName = step.StepName;
+                result.StepNumber = step.StepNumber;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }

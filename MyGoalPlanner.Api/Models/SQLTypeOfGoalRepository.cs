@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,58 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLTypeOfGoalRepository : ITypeOfGoalRepository
     {
-        public Task<TypeOfGoal> AddTypeOfGoal(TypeOfGoal typeOfGoal)
+        private readonly AppDbContext appDbContext;
+
+        public SQLTypeOfGoalRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteGoalType(int goalTypeId)
+        public async Task<TypeOfGoal> AddTypeOfGoal(TypeOfGoal typeOfGoal)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.TypeOfGoals.AddAsync(typeOfGoal);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<IEnumerable<TypeOfGoal>> GetAllTypes()
+        public async void DeleteGoalType(int goalTypeId)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.TypeOfGoals
+                .FirstOrDefaultAsync(e => e.TypeOfGoalId == goalTypeId);
+
+            if(result != null)
+            {
+                appDbContext.TypeOfGoals.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<TypeOfGoal> GetTypeOfGoal(int goalTypeId)
+        public async Task<IEnumerable<TypeOfGoal>> GetAllTypes()
         {
-            throw new NotImplementedException();
+            return await appDbContext.TypeOfGoals.ToListAsync();
         }
 
-        public Task<TypeOfGoal> UpdateTypeOfGoal(TypeOfGoal typeOfGoal)
+        public async Task<TypeOfGoal> GetTypeOfGoal(int goalTypeId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.TypeOfGoals
+                .FirstAsync(e => e.TypeOfGoalId == goalTypeId);
+        }
+
+        public async Task<TypeOfGoal> UpdateTypeOfGoal(TypeOfGoal typeOfGoal)
+        {
+            var result = await appDbContext.TypeOfGoals
+                .FirstAsync(e => e.TypeOfGoalId == typeOfGoal.TypeOfGoalId);
+
+            if(result != null)
+            {
+                result.Name = typeOfGoal.Name;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }

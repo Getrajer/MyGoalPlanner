@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,61 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLMotivatorRepository : IMotivatorRepository
     {
-        public Task<Motivator> AddMotivator(Motivator motivator)
+        private readonly AppDbContext appDbContext;
+
+        public SQLMotivatorRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteMotivator(int motivatorId)
+        public async Task<Motivator> AddMotivator(Motivator motivator)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Motivators.AddAsync(motivator);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<IEnumerable<Motivator>> GetAllMotivators()
+        public async void DeleteMotivator(int motivatorId)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Motivators
+                .FirstOrDefaultAsync(e => e.MotivatorId == motivatorId);
+
+            if(result != null)
+            {
+                appDbContext.Motivators.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<Motivator> GetMotivator(int motivatorId)
+        public async Task<IEnumerable<Motivator>> GetAllMotivators()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Motivators.ToListAsync();
         }
 
-        public Task<Motivator> UpdateMotivator(Motivator motivator)
+        public async Task<Motivator> GetMotivator(int motivatorId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Motivators
+                .FirstOrDefaultAsync(e => e.MotivatorId == motivatorId);
+        }
+
+        public async Task<Motivator> UpdateMotivator(Motivator motivator)
+        {
+            var result = await appDbContext.Motivators
+                .FirstOrDefaultAsync(e => e.MotivatorId == motivator.MotivatorId);
+
+            if(result != null)
+            {
+                result.MotivatorLink = motivator.MotivatorLink;
+                result.MotivatorName = motivator.MotivatorName;
+                result.MotivatorText = motivator.MotivatorText;
+                result.Prize = motivator.Prize;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }

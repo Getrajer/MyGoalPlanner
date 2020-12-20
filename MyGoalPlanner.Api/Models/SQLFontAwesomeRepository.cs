@@ -28,21 +28,41 @@ namespace MyGoalPlanner.Api.Models
         {
             var result = await appDbContext.FontAwesomeIcons
                 .FirstOrDefaultAsync(e => e.FontAwesomeIconId == fontAwesomeIconId);
+
+            if(result != null)
+            {
+                appDbContext.FontAwesomeIcons.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<IEnumerable<FontAwesomeIcon>> GetAllFontAwesomeIcons()
+        public async Task<IEnumerable<FontAwesomeIcon>> GetAllFontAwesomeIcons()
         {
-            throw new NotImplementedException();
+            return await appDbContext.FontAwesomeIcons.ToListAsync();
         }
 
-        public Task<FontAwesomeIcon> GetFontAwesomeIcon(int fontAwesomeIconlId)
+        public async Task<FontAwesomeIcon> GetFontAwesomeIcon(int fontAwesomeIconlId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.FontAwesomeIcons
+                .FirstOrDefaultAsync(e => e.FontAwesomeIconId == fontAwesomeIconlId);
         }
 
-        public Task<FontAwesomeIcon> UpdateFontAwesomeIcon(FontAwesomeIcon fontAwesomeIcon)
+        public async Task<FontAwesomeIcon> UpdateFontAwesomeIcon(FontAwesomeIcon fontAwesomeIcon)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.FontAwesomeIcons
+                .FirstOrDefaultAsync(e => e.FontAwesomeIconId == fontAwesomeIcon.FontAwesomeIconId);
+
+            if(result != null)
+            {
+                result.IconName = fontAwesomeIcon.IconName;
+                result.IconSymbol = fontAwesomeIcon.IconSymbol;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }

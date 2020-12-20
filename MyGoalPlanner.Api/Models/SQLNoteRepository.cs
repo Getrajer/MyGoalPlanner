@@ -1,4 +1,5 @@
-﻿using MyGoalPlanner.Models.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MyGoalPlanner.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,58 @@ namespace MyGoalPlanner.Api.Models
 {
     public class SQLNoteRepository : INoteRepository
     {
-        public Task<Note> AddNote(Note note)
+        private readonly AppDbContext appDbContext;
+
+        public SQLNoteRepository(AppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            this.appDbContext = appDbContext;
         }
 
-        public void DeleteNote(int noteId)
+        public async Task<Note> AddNote(Note note)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Notes.AddAsync(note);
+            await appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
 
-        public Task<IEnumerable<Note>> GetAllNotes()
+        public async void DeleteNote(int noteId)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Notes
+                .FirstOrDefaultAsync(e => e.NoteId == noteId);
+
+            if(result != null)
+            {
+                appDbContext.Notes.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<Note> GetNote(int noteId)
+        public async Task<IEnumerable<Note>> GetAllNotes()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Notes.ToListAsync();
         }
 
-        public Task<Note> UpdateNote(Note note)
+        public async Task<Note> GetNote(int noteId)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Notes
+                .FirstOrDefaultAsync(e => e.NoteId == noteId);
+        }
+
+        public async Task<Note> UpdateNote(Note note)
+        {
+            var result = await appDbContext.Notes
+                .FirstOrDefaultAsync(e => e.NoteId == note.NoteId);
+
+            if(result != null)
+            {
+                result.NoteText = note.NoteText;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return result;
         }
     }
 }
