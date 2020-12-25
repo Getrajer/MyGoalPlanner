@@ -1,0 +1,21 @@
+﻿.create_goal_page {
+}
+
+label{
+    display:block;
+}
+
+input{
+    display:block;
+    width: 100%;
+}
+
+.form{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.double_form_box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
