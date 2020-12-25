@@ -29,6 +29,14 @@ namespace MyGoalPlanner.Api
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+            services.AddScoped<IFontAwesomeRepository, SQLFontAwesomeRepository>();
+            services.AddScoped<IGoalConditionRepository, SQLGoalConditionRepository>();
+            services.AddScoped<IGoalItemRepository, SQLGoalItemRepository>();
+            services.AddScoped<IGoalRepository, SQLGoalRepository>();
+            services.AddScoped<IMotivatorRepository, SQLMotivatorRepository>();
+            services.AddScoped<INoteRepository, SQLNoteRepository>();
+            services.AddScoped<IStepRepostitory, SQLStepRepository>();
+            services.AddScoped<ITypeOfGoalRepository, SQLTypeOfGoalRepository>();
             services.AddControllers();
         }
 

@@ -1,0 +1,108 @@
+﻿@page "/"
+
+
+<section class="create_goal_page">
+    <div class="create_goal_page_container">
+
+        <div class="title_container">
+            <h1>Create goal</h1>
+        </div>
+
+        <form>
+            <div class="left">
+                <div class="left_container">
+
+                    <div class="form_box">
+                        <label>Name of goal</label>
+                        <input placeholder="name" />
+                        <p class="error"></p>
+                    </div>
+
+                    <div class="form_box">
+                        <label>Description</label>
+                        <textarea></textarea>
+                        <p class="error"></p>
+                    </div>
+
+                    <div class="double_form_box">
+                        <div class="form_box">
+                            <label>Start of goal</label>
+                            <input type="date" />
+                            <p class="error"></p>
+                        </div>
+
+                        <div class="form_box">
+                            <label>End of goal</label>
+                            <input type="date" />
+                            <p class="error"></p>
+                        </div>
+                    </div>
+
+                    <div class="form_box">
+                        <label>Note</label>
+                        <textarea></textarea>
+                        <p class="error"></p>
+                    </div>
+
+                    <div class="form_box">
+                        <label>Has motivator</label>
+                        <input type="checkbox" />
+                    </div>
+
+                    <div class="motivator_container">
+                        <label>Add type of motivator</label>
+
+                        <div class="motivator_checkbox">
+                            <label>Add video</label>
+                            <input type="checkbox" />
+
+                            <div class="video_input">
+                                <label>Video link</label>
+                                <input />
+                            </div>
+                        </div>
+
+                        <div class="motivator_checkbox">
+                            <label>Add mantra</label>
+                            <input type="checkbox" />
+
+                            <div class="video_input">
+                                <label>Enter your mantra</label>
+                                <textarea></textarea>
+                            </div>
+                        </div>
+
+                        <div class="motivator_checkbox">
+                            <label>Add image</label>
+                            <input type="checkbox" />
+
+                            <div class="image_input">
+                                <label>Add link to image</label>
+                                <input />
+                            </div>
+                        </div>
+
+
+                        <div class="motivator_checkbox">
+                            <label>Expected prize</label>
+                            <input type="checkbox" />
+
+                            <div class="image_input">
+                                <label>For what you work for?</label>
+                                <textarea></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="right_container">
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

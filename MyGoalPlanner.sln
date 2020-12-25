@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGoalPlanner.Models", "Models\MyGoalPlanner.Models.csproj", "{FD120300-93F3-46A8-A995-CC86035C2335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGoalPlanner.Web", "MyGoalPlanner.Web\MyGoalPlanner.Web.csproj", "{D7DB47BD-BE13-4C66-B1B1-B114FB3BB689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGoalPlanner.Web", "MyGoalPlanner.Web\MyGoalPlanner.Web.csproj", "{D7DB47BD-BE13-4C66-B1B1-B114FB3BB689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGoalPlanner.Api", "MyGoalPlanner.Api\MyGoalPlanner.Api.csproj", "{70D4BEF7-9E20-4177-9C49-89643F5BA184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyGoalPlanner.Api", "MyGoalPlanner.Api\MyGoalPlanner.Api.csproj", "{70D4BEF7-9E20-4177-9C49-89643F5BA184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
