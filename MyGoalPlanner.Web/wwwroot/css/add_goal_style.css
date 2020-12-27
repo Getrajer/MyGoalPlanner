@@ -10,12 +10,29 @@ input{
     width: 100%;
 }
 
+
+
 .form{
     display:grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.double_form_box{
+.left{
+    display:flex;
+    width:100%;
+    justify-content:center;
+}
+
+.left_container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2em;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+
+.double_form_box {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
