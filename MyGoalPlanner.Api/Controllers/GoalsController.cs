@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyGoalPlanner.Api.Models;
+using MyGoalPlanner.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,27 @@ namespace MyGoalPlanner.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error geting data from the database");
             }
+        }
 
-            
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Goal>> GetGoal(int id)
+        {
+            try
+            {
+                var result = await goalRepository.GetGoal(id);
+
+                if(result == null)
+                {
+                    return NotFound();
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
+            }
         }
 
     }
