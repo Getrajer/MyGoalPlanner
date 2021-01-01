@@ -54,6 +54,5 @@ namespace MyGoalPlanner.Api.Controllers
                     "Error geting data from the database");
             }
         }
-
     }
 }
