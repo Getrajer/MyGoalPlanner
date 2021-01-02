@@ -103,5 +103,27 @@ namespace MyGoalPlanner.Api.Controllers
                                   "Error updating data");
             }
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Goal>> DeleteGoal(int id)
+        {
+            try
+            {
+                var goalToDelete = await goalRepository.GetGoal(id);
+
+                if(goalToDelete == null)
+                {
+                    return NotFound($"Goal with Id = {id} not found");
+                }
+
+                return await goalRepository.DeleteGoal(id);
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                                 "Error deleting data");
+            }
+        }
     }
 }

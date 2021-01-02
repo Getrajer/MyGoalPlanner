@@ -12,6 +12,6 @@ namespace MyGoalPlanner.Api.Models
         Task<Goal> GetGoal(int goalId);
         Task<Goal> AddGoal(Goal goal);
         Task<Goal> UpdateGoal(Goal goal);
-        void DeleteGoal(int goalId);
+        Task<Goal> DeleteGoal(int goalId);
     }
 }

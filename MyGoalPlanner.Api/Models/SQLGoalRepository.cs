@@ -23,7 +23,7 @@ namespace MyGoalPlanner.Api.Models
             return result.Entity;
         }
 
-        public async void DeleteGoal(int goalId)
+        public async Task<Goal> DeleteGoal(int goalId)
         {
             var result = await appDbContext.Goals
                 .FirstOrDefaultAsync(e => e.GoalId == goalId);
@@ -32,7 +32,10 @@ namespace MyGoalPlanner.Api.Models
             {
                 appDbContext.Goals.Remove(result);
                 await appDbContext.SaveChangesAsync();
+                return result;
             }
+
+            return null;
         }
 
         public async Task<IEnumerable<Goal>> GetAllGoals()
