@@ -34,6 +34,29 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Goal>> CreateGoal(Goal goal)
+        {
+            try
+            {
+                if(goal == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var createdGoal = await goalRepository.AddGoal(goal);
+
+                    return CreatedAtAction(nameof(GetGoal), new { id = createdGoal.GoalId }, createdGoal);
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                    "Error with posting data to the database");
+            }
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Goal>> GetGoal(int id)
         {
