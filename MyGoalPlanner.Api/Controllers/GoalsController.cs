@@ -77,5 +77,31 @@ namespace MyGoalPlanner.Api.Controllers
                     "Error geting data from the database");
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Goal>> UpdateGoal(int id, Goal goal)
+        {
+            try
+            {
+                if(id != goal.GoalId)
+                {
+                    return BadRequest("Goal ID mistmach");
+                }
+
+                var goalToUpdate = await goalRepository.GetGoal(id);
+
+                if(goalToUpdate == null)
+                {
+                    return NotFound($"Goal with Id = {id} not found");
+                }
+
+                return await goalRepository.UpdateGoal(goal);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  "Error updating data");
+            }
+        }
     }
 }
