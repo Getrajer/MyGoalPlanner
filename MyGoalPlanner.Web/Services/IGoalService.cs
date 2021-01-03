@@ -9,5 +9,6 @@ namespace MyGoalPlanner.Web.Services
     public interface IGoalService
     {
         Task<IEnumerable<Goal>> GetGoals();
+        Task<Goal> GetGoal(int id);
     }
 }

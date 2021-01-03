@@ -8,22 +8,19 @@ using System.Threading.Tasks;
 
 namespace MyGoalPlanner.Web.Pages.ComponentBases
 {
-    public class GoalsBase : ComponentBase
+    public class GoalDetailsBase : ComponentBase
     {
+        public Goal Goal { get; set; } = new Goal();
+
         [Inject]
         public IGoalService GoalService { get; set; }
 
-        public IEnumerable<Goal> Goals { get; set; }
+        [Parameter]
+        public string Id { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected async override Task OnInitializedAsync()
         {
-
-            Goal g1 = new Goal();
-
-            g1.Name = "Test 1";
-
-            //Goals = (await GoalService.GetGoals()).ToList();
+            Goal = await GoalService.GetGoal(int.Parse(Id));
         }
-
     }
 }

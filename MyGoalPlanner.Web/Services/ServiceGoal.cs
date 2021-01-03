@@ -17,6 +17,11 @@ namespace MyGoalPlanner.Web.Services
             this.httpClient = httpClient;
         }
 
+        public async Task<Goal> GetGoal(int id)
+        {
+            return await httpClient.GetJsonAsync<Goal>($"api/goals/{id}");
+        }
+
         public async Task<IEnumerable<Goal>> GetGoals()
         {
             return await httpClient.GetJsonAsync<Goal[]>("api/goals");

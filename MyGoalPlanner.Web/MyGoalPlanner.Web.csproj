@@ -5,11 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\GoalDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Models\MyGoalPlanner.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\GoalDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\GoalDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\GoalDetails.razor" />
   </ItemGroup>
 
 </Project>
