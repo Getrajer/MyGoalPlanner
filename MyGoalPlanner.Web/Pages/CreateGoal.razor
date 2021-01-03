@@ -5,12 +5,19 @@
     <link rel="stylesheet" href="../css/add_goal_style.css" />
 </head>
 
+@if (Goals != null)
+{
+    <div class="goals">
+        @foreach (var goal in Goals)
+        {
+            <p>@goal.Name</p>
+        }
 
-<div class="goals">
-   
+    </div>
+}
 
-</div>
 
+<button @onclick="CreateGoal">Create Goal</button>
 
 <section class="create_goal_page">
     <div class="create_goal_page_container">
@@ -25,7 +32,7 @@
 
                     <div class="form_box">
                         <label>Name of goal</label>
-                        <input placeholder="name" />
+                        <input @bind="GoalName" placeholder="name" />
                         <p class="error"></p>
                     </div>
 

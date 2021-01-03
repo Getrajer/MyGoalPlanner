@@ -15,14 +15,20 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         public IEnumerable<Goal> Goals { get; set; }
 
+
+        protected string GoalName = "";
+
         protected override async Task OnInitializedAsync()
         {
+            Goals = (await GoalService.GetGoals()).ToList();
+        }
 
+        public async Task CreateGoal()
+        {
             Goal g1 = new Goal();
+            g1.Name = GoalName;
 
-            g1.Name = "Test 1";
-
-            //Goals = (await GoalService.GetGoals()).ToList();
+            var result = await GoalService.CreateGoal(g1);
         }
 
     }
