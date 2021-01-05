@@ -19,8 +19,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         #region Content_Togglers_Variables
 
+        protected bool IfHasDeadline = false;
         protected bool IfHasMotivator = false;
         protected bool IfHasVideoMotivator = false;
+        protected bool IfHasMantraMotivator = false;
+        protected bool IfHasImageMotivator = false;
+        protected bool IfHasPrizeMotivator = false;
+        protected bool IfHasListOfSteps = false;
 
         #endregion
 
@@ -47,6 +52,54 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             else
             {
                 IfHasVideoMotivator = true;
+            }
+        }
+
+        public void ToggleHasMantraMotivator()
+        {
+            if (IfHasMantraMotivator)
+            {
+                IfHasMantraMotivator = false;
+            }
+            else
+            {
+                IfHasMantraMotivator = true;
+            }
+        }
+
+        public void ToggleHasImageMotivator()
+        {
+            if (IfHasImageMotivator)
+            {
+                IfHasImageMotivator = false;
+            }
+            else
+            {
+                IfHasImageMotivator = true;
+            }
+        }
+
+        public void ToggleHasPrizeMotivator()
+        {
+            if (IfHasPrizeMotivator)
+            {
+                IfHasPrizeMotivator = false;
+            }
+            else
+            {
+                IfHasPrizeMotivator = true;
+            }
+        }
+
+        public void ToggleHasListOfSteps()
+        {
+            if (IfHasListOfSteps)
+            {
+                IfHasListOfSteps = false;
+            }
+            else
+            {
+                IfHasListOfSteps = true;
             }
         }
 

@@ -85,38 +85,50 @@
                                     </div>
                                 }
 
-
                             </div>
 
                             <div class="motivator_checkbox">
                                 <label>Add mantra</label>
-                                <input type="checkbox" />
+                                <input @onclick="ToggleHasMantraMotivator" type="checkbox" />
 
-                                <div class="video_input">
-                                    <label>Enter your mantra</label>
-                                    <textarea></textarea>
-                                </div>
+                                @if (IfHasMantraMotivator)
+                                {
+                                    <div class="video_input">
+                                        <label>Enter your mantra</label>
+                                        <textarea></textarea>
+                                    </div>
+                                }
+
                             </div>
 
                             <div class="motivator_checkbox">
                                 <label>Add image</label>
-                                <input type="checkbox" />
+                                <input @onclick="ToggleHasImageMotivator" type="checkbox" />
 
-                                <div class="image_input">
-                                    <label>Add link to image</label>
-                                    <input />
-                                </div>
+                                @if (IfHasImageMotivator)
+                                {
+                                    <div class="image_input">
+                                        <label>Add link to image</label>
+                                        <input />
+                                    </div>
+                                }
+
                             </div>
 
 
                             <div class="motivator_checkbox">
-                                <label>Expected prize</label>
-                                <input type="checkbox" />
+                                <label>Expected prize?</label>
+                                <input @onclick="ToggleHasPrizeMotivator" type="checkbox" />
 
-                                <div class="image_input">
-                                    <label>For what you work for?</label>
-                                    <textarea></textarea>
-                                </div>
+                                @if (IfHasPrizeMotivator)
+                                {
+                                    <div class="image_input">
+                                        <label>For what you work for?</label>
+                                        <textarea></textarea>
+                                    </div>
+                                }
+
+
                             </div>
                         </div>
                     }
@@ -130,27 +142,29 @@
             <div class="right">
                 <div class="right_container">
 
-                    <div class="list_of_steps">
-                        <div class="form_box">
-                            <label>Has list of steps</label>
-                            <input type="checkbox" />
-                        </div>
-
-                        <div class="step">
-                            <div class="form_box">
-                                <label>Step Name</label>
-                                <span>1. </span>
-                                <input />
-                                <button>X</button>
-                            </div>
-                        </div>
-
-                        <div class="step_button_container">
-                            <button>Add Next Step</button>
-                        </div>
-
+                    <div class="form_box">
+                        <label>Has list of steps</label>
+                        <input @onclick="ToggleHasListOfSteps" type="checkbox" />
                     </div>
 
+                    @if (IfHasListOfSteps)
+                    {
+                        <div class="list_of_steps">
+                            <div class="step">
+                                <div class="form_box">
+                                    <label>Step Name</label>
+                                    <span>1. </span>
+                                    <input />
+                                    <button>X</button>
+                                </div>
+                            </div>
+
+                            <div class="step_button_container">
+                                <button>Add Next Step</button>
+                            </div>
+
+                        </div>
+                    }
 
 
                 </div>
