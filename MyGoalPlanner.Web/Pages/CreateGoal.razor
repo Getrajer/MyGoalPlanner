@@ -42,19 +42,35 @@
                         <p class="error"></p>
                     </div>
 
-                    <div class="double_form_box">
+                    <div>
+                        <label>Configure start date for the goal</label>
+                        <input @onclick="ToggleConfigureDateStart" type="checkbox" />
+                    </div>
+
+                    @if (IfConfigureStartDate)
+                    {
                         <div class="form_box">
                             <label>Start of goal</label>
                             <input type="date" />
                             <p class="error"></p>
                         </div>
+                    }
 
+                    <div>
+                        <label>Configure deadline for the goal</label>
+                        <input @onclick="ToggleConfigureDateStart" type="checkbox" />
+                    </div>
+
+                    @if (IfConfigureEndDate)
+                    {
                         <div class="form_box">
                             <label>End of goal</label>
                             <input type="date" />
                             <p class="error"></p>
                         </div>
-                    </div>
+                    }
+
+
 
                     <div class="form_box">
                         <label>Note</label>

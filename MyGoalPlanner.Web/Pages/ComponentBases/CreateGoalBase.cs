@@ -19,6 +19,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         #region Content_Togglers_Variables
 
+        protected bool IfConfigureStartDate = false;
+        protected bool IfConfigureEndDate = false;
         protected bool IfHasDeadline = false;
         protected bool IfHasMotivator = false;
         protected bool IfHasVideoMotivator = false;
@@ -100,6 +102,30 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             else
             {
                 IfHasListOfSteps = true;
+            }
+        }
+
+        public void ToggleConfigureDateStart()
+        {
+            if (IfConfigureStartDate)
+            {
+                IfConfigureStartDate = false;
+            }
+            else
+            {
+                IfConfigureStartDate = true;
+            }
+        }
+
+        public void ToggleConfigureDateEnd()
+        {
+            if (IfConfigureEndDate)
+            {
+                IfConfigureEndDate = false;
+            }
+            else
+            {
+                IfConfigureEndDate = true;
             }
         }
 
