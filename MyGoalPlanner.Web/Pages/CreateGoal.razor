@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inherits GoalsBase
+@inherits CreateGoalBase
 
 <head>
     <link rel="stylesheet" href="../css/add_goal_style.css" />
@@ -64,54 +64,64 @@
 
                     <div class="form_box">
                         <label>Has motivator</label>
-                        <input type="checkbox" />
+                        <input type="checkbox" @onclick="ToggleHasMotivator" />
                     </div>
 
-                    <div class="motivator_container">
-                        <label>Add type of motivator</label>
+                    @if (IfHasMotivator)
+                    {
 
-                        <div class="motivator_checkbox">
-                            <label>Add video</label>
-                            <input type="checkbox" />
+                        <div class="motivator_container">
+                            <label>Add type of motivator</label>
 
-                            <div class="video_input">
-                                <label>Video link</label>
-                                <input />
+                            <div class="motivator_checkbox">
+                                <label>Add video</label>
+                                <input @onclick="ToggleHasVideoMotivator" type="checkbox" />
+
+                                @if (IfHasVideoMotivator)
+                                {
+                                    <div class="video_input">
+                                        <label>Video link</label>
+                                        <input />
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <div class="motivator_checkbox">
+                                <label>Add mantra</label>
+                                <input type="checkbox" />
+
+                                <div class="video_input">
+                                    <label>Enter your mantra</label>
+                                    <textarea></textarea>
+                                </div>
+                            </div>
+
+                            <div class="motivator_checkbox">
+                                <label>Add image</label>
+                                <input type="checkbox" />
+
+                                <div class="image_input">
+                                    <label>Add link to image</label>
+                                    <input />
+                                </div>
+                            </div>
+
+
+                            <div class="motivator_checkbox">
+                                <label>Expected prize</label>
+                                <input type="checkbox" />
+
+                                <div class="image_input">
+                                    <label>For what you work for?</label>
+                                    <textarea></textarea>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="motivator_checkbox">
-                            <label>Add mantra</label>
-                            <input type="checkbox" />
-
-                            <div class="video_input">
-                                <label>Enter your mantra</label>
-                                <textarea></textarea>
-                            </div>
-                        </div>
-
-                        <div class="motivator_checkbox">
-                            <label>Add image</label>
-                            <input type="checkbox" />
-
-                            <div class="image_input">
-                                <label>Add link to image</label>
-                                <input />
-                            </div>
-                        </div>
+                    }
 
 
-                        <div class="motivator_checkbox">
-                            <label>Expected prize</label>
-                            <input type="checkbox" />
-
-                            <div class="image_input">
-                                <label>For what you work for?</label>
-                                <textarea></textarea>
-                            </div>
-                        </div>
-
-                    </div>
 
                 </div>
             </div>
