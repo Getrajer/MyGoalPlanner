@@ -128,7 +128,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 IfConfigureEndDate = true;
             }
         }
-
         #endregion
 
         protected string GoalName = "";
