@@ -15,6 +15,37 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         public IEnumerable<Goal> Goals { get; set; }
 
+        #region Form_Input_Variables
+
+        protected string goalName = "";
+        protected string goalDescription = "";
+        protected DateTime timeStartOfTheGoal;
+        protected DateTime timeEndOfTheGoal;
+
+        protected string linkToVideoMotivator = "";
+        protected string mantra = "";
+        protected string linkToImage = "";
+        protected string prize = "";
+
+
+
+        #endregion
+
+
+        #region Form_Input_Variables
+
+        protected string goalName_error = "";
+        protected string goalDescription_error = "";
+        protected string timeStartOfTheGoal_error;
+        protected string timeEndOfTheGoal_error;
+        protected string linkToVideoMotivator_error = "";
+        protected string mantra_error = "";
+        protected string linkToImage_error = "";
+        protected string prize_error = "";
+
+
+
+        #endregion
 
 
         #region Content_Togglers_Variables
@@ -22,7 +53,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected bool IfConfigureStartDate = false;
         protected bool IfConfigureEndDate = false;
         protected bool IfHasDeadline = false;
-        protected bool IfHasMotivator = false;
+        protected bool IfHasMotivator = true;
         protected bool IfHasVideoMotivator = false;
         protected bool IfHasMantraMotivator = false;
         protected bool IfHasImageMotivator = false;
@@ -130,19 +161,38 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         }
         #endregion
 
-        protected string GoalName = "";
 
         protected override async Task OnInitializedAsync()
         {
+            timeEndOfTheGoal = DateTime.Now;
+            timeStartOfTheGoal = DateTime.Now;
+
             Goals = (await GoalService.GetGoals()).ToList();
+        }
+
+        public async Task CheckInput()
+        {
+
         }
 
         public async Task CreateGoal()
         {
-            Goal g1 = new Goal();
-            g1.Name = GoalName;
+            bool errorOccured = false;
 
-            var result = await GoalService.CreateGoal(g1);
+            if(goalName == "")
+            {
+                goalName_error = "Please enter a name for your goal";
+                errorOccured = true;
+            }
+
+
+            Goal goal = new Goal();
+            goal.Name = goalName;
+            goal.Description = goalDescription;
+            goal.TimeStart = timeStartOfTheGoal;
+            goal.TimeEnd = timeEndOfTheGoal;
+
+            var result = await GoalService.CreateGoal(goal);
         }
     }
 }

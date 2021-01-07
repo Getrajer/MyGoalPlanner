@@ -32,14 +32,14 @@
 
                     <div class="form_box">
                         <label>Name of goal</label>
-                        <input @bind="GoalName" placeholder="name" />
-                        <p class="error"></p>
+                        <input @bind="goalName" placeholder="name" />
+                        <p class="error">@goalName_error</p>
                     </div>
 
                     <div class="form_box">
                         <label>Description</label>
                         <textarea></textarea>
-                        <p class="error"></p>
+                        <p class="error">@goalDescription_error</p>
                     </div>
 
                     <div>
@@ -58,7 +58,7 @@
 
                     <div>
                         <label>Configure deadline for the goal</label>
-                        <input @onclick="ToggleConfigureDateStart" type="checkbox" />
+                        <input @onclick="ToggleConfigureDateEnd" type="checkbox" />
                     </div>
 
                     @if (IfConfigureEndDate)
