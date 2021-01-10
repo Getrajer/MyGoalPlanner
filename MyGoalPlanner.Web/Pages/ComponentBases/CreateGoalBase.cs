@@ -269,11 +269,11 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 }
             }
 
-
             if (!errorOccured)
             {
                 Goal goal = new Goal();
                 goal.Name = goalName;
+
                 goal.Description = goalDescription;
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
