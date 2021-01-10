@@ -9,5 +9,7 @@ namespace MyGoalPlanner.Models.ViewModels
         public Note Note { get; set; }
         public List<Step> ListOfSteps { get; set; }
         public TypeOfGoal TypeOfGoal { get; set; }
+        //Ammount of actions done (Created goal items)
+        public GoalCondition Condition { get; set; }
     }
 }

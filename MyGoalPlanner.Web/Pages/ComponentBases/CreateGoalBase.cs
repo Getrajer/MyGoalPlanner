@@ -15,6 +15,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         public IEnumerable<Goal> Goals { get; set; }
 
+
         #region Form_Input_Variables
 
         protected string goalName = "";
