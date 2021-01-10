@@ -1,9 +1,11 @@
 ﻿using MyGoalPlanner.Models.Models;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MyGoalPlanner.Models.ViewModels
 {
-    class CreateGoalViewModel
+    public class CreateGoalViewModel
     {
         public Goal Goal { get; set; }
         public Note Note { get; set; }

@@ -17,7 +17,7 @@
             <h1>Create goal</h1>
         </div>
 
-        <EditForm class="form">
+        <div class="form">
             <div class="left">
                 <div class="left_container">
 
@@ -163,17 +163,23 @@
                     @if (IfHasListOfSteps)
                     {
                         <div class="list_of_steps">
-                            <div class="step">
-                                <div class="form_box">
-                                    <label>Step Name</label>
-                                    <span>1. </span>
-                                    <input />
-                                    <button>X</button>
+
+                            @foreach(var step in ListOfSteps)
+                            {
+                                <div class="step">
+                                    <div class="form_box">
+                                        <label>Step Name</label>
+                                        <span>@step.StepId. </span>
+                                        <input @bind="step.StepName" />
+                                        <button @onclick="(() => RemoveStepById(step.StepId))">X</button>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
+                            
 
                             <div class="step_button_container">
-                                <button>Add Next Step</button>
+                                <button @onclick="AddStepToList">Add Next Step</button>
                             </div>
 
                         </div>
@@ -184,7 +190,7 @@
             </div>
 
 
-        </EditForm>
+        </div>
     </div>
 </section>
 

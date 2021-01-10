@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
+using MyGoalPlanner.Models.Models;
+using MyGoalPlanner.Models.ViewModels;
 using MyGoalPlanner.Web.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
     {
         [Inject]
         public IGoalService GoalService { get; set; }
+
+        [Inject]
+        public IStepService StepService { get; set; }
 
         public IEnumerable<Goal> Goals { get; set; }
 
@@ -31,6 +36,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         //Min date time pickers
         protected string minStartDate = "";
         protected string minEndDate = "";
+
+        protected List<Step> ListOfSteps = new List<Step>();
 
         #endregion
 
@@ -174,6 +181,22 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             minStartDate = DateTime.UtcNow.ToString("s");
 
             Goals = (await GoalService.GetGoals()).ToList();
+        }
+
+        public void AddStepToList()
+        {
+            Step newStep = new Step();
+            newStep.StepId = ListOfSteps.Count + 1;
+            ListOfSteps.Add(newStep);
+        }
+
+        public async void RemoveStepById(int Id)
+        {
+            ListOfSteps.RemoveAt(Id - 1);
+            for(int i = 0; i < ListOfSteps.Count; i++)
+            {
+                ListOfSteps[i].StepId = i + 1;
+            }
         }
 
         public async Task CheckInput()

@@ -32,6 +32,10 @@ namespace MyGoalPlanner.Web
             {
                 client.BaseAddress = new Uri("https://localhost:44381/");
             });
+            services.AddHttpClient<IStepService, ServiceStep>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44381/");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
