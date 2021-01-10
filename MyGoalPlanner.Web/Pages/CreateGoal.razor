@@ -5,16 +5,7 @@
     <link rel="stylesheet" href="../css/add_goal_style.css" />
 </head>
 
-@if (Goals != null)
-{
-    <div class="goals">
-        @foreach (var goal in Goals)
-        {
-            <p>@goal.Name</p>
-        }
 
-    </div>
-}
 
 
 <button @onclick="CreateGoal">Create Goal</button>
@@ -38,14 +29,14 @@
 
                     <div class="form_box">
                         <label>Description</label>
-                        <textarea></textarea>
+                        <textarea @bind="goalDescription"></textarea>
                         <p class="error">@goalDescription_error</p>
                     </div>
 
                     <div>
 
                         <label>Configure start date for the goal</label>
-                        <p>@minStartDate</p>
+                        <p>@timeStartOfTheGoal</p>
                         <input @onclick="ToggleConfigureDateStart" type="checkbox" />
                     </div>
 
@@ -53,7 +44,7 @@
                     {
                         <div class="form_box">
                             <label>Start of goal</label>
-                            <input type="datetime-local" value="@minStartDate" min="@minStartDate"/>
+                            <input @bind="timeStartOfTheGoal" type="datetime-local" min="@minStartDate" />
                             <p class="error"></p>
                         </div>
                     }
@@ -67,7 +58,7 @@
                     {
                         <div class="form_box">
                             <label>End of goal</label>
-                            <input type="date" value="@DateTime.Now.ToString()" min="@DateTime.Now.ToString()" />
+                            <input type="datetime-local" @bind="timeEndOfTheGoal" min="@timeStartOfTheGoal.ToString("s")" />
                             <p class="error"></p>
                         </div>
                     }
@@ -99,7 +90,8 @@
                                 {
                                     <div class="video_input">
                                         <label>Video link</label>
-                                        <input />
+                                        <input @bind="linkToVideoMotivator" />
+                                        <p>@linkToVideoMotivator_error</p>
                                     </div>
                                 }
                             </div>
@@ -112,7 +104,8 @@
                                 {
                                     <div class="video_input">
                                         <label>Enter your mantra</label>
-                                        <textarea></textarea>
+                                        <textarea @bind="mantra"></textarea>
+                                        <p>@mantra_error</p>
                                     </div>
                                 }
 
@@ -126,7 +119,8 @@
                                 {
                                     <div class="image_input">
                                         <label>Add link to image</label>
-                                        <input />
+                                        <input @bind="linkToImage" />
+                                        <p>@linkToImage_error</p>
                                     </div>
                                 }
 
@@ -141,7 +135,8 @@
                                 {
                                     <div class="image_input">
                                         <label>For what you work for?</label>
-                                        <textarea></textarea>
+                                        <textarea @bind="prize"></textarea>
+                                        <p>@prize_error</p>
                                     </div>
                                 }
 
@@ -191,3 +186,25 @@
         </form>
     </div>
 </section>
+
+
+@if (Goals != null)
+{
+    <div class="goals">
+        @foreach (var goal in Goals)
+        {
+            <p>@goal.Name</p>
+            <p>@goal.Description</p>
+            <p>@goal.TimeStart</p>
+            <p>@goal.TimeEnd</p>
+
+        }
+
+    </div>
+}else{
+
+    <div class="spinner-border">
+
+    </div>
+
+    }

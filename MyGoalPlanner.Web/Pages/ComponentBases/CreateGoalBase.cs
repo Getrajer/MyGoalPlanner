@@ -45,8 +45,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected string linkToImage_error = "";
         protected string prize_error = "";
 
-
-
         #endregion
 
 
@@ -55,7 +53,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected bool IfConfigureStartDate = false;
         protected bool IfConfigureEndDate = false;
         protected bool IfHasDeadline = false;
-        protected bool IfHasMotivator = true;
+        protected bool IfHasMotivator = false;
         protected bool IfHasVideoMotivator = false;
         protected bool IfHasMantraMotivator = false;
         protected bool IfHasImageMotivator = false;
@@ -166,8 +164,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         protected override async Task OnInitializedAsync()
         {
-            timeEndOfTheGoal = DateTime.Now;
-            timeStartOfTheGoal = DateTime.Now;
+            timeEndOfTheGoal = DateTime.UtcNow;
+            timeStartOfTheGoal = DateTime.UtcNow;
 
 
             minStartDate = DateTime.UtcNow.ToString("s");
@@ -190,6 +188,46 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 errorOccured = true;
             }
 
+            if (IfHasMotivator)
+            {
+                bool oneMotivator = false;
+
+                if (IfHasVideoMotivator)
+                {
+                    oneMotivator = true;
+
+                    if(linkToVideoMotivator == "")
+                    {
+                        linkToVideoMotivator_error = "Please enter link to video motivator!";
+                        errorOccured = true;
+                    }
+                }
+
+                if (IfHasMantraMotivator)
+                {
+                    if(mantra == "")
+                    {
+                        mantra_error = "Please enter your mantra!";
+                        errorOccured = true;
+                    }
+                }
+
+                if (IfHasImageMotivator)
+                {
+                    if(linkToImage == "")
+                    {
+                        linkToImage_error = "Please add link to image motivator!";
+                    }
+                }
+
+                if (IfHasPrizeMotivator)
+                {
+                    if(prize == "")
+                    {
+                        prize_error = "Please ener your expected prize!";
+                    }
+                }
+            }
 
             Goal goal = new Goal();
             goal.Name = goalName;
