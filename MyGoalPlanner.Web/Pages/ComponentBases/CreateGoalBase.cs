@@ -27,7 +27,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected string linkToImage = "";
         protected string prize = "";
 
-
+        //Min date time pickers
+        protected string minStartDate = "";
+        protected string minEndDate = "";
 
         #endregion
 
@@ -166,6 +168,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         {
             timeEndOfTheGoal = DateTime.Now;
             timeStartOfTheGoal = DateTime.Now;
+
+
+            minStartDate = DateTime.UtcNow.ToString("s");
 
             Goals = (await GoalService.GetGoals()).ToList();
         }

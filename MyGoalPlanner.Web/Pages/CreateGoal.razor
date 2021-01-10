@@ -43,7 +43,9 @@
                     </div>
 
                     <div>
+
                         <label>Configure start date for the goal</label>
+                        <p>@minStartDate</p>
                         <input @onclick="ToggleConfigureDateStart" type="checkbox" />
                     </div>
 
@@ -51,7 +53,7 @@
                     {
                         <div class="form_box">
                             <label>Start of goal</label>
-                            <input type="date" />
+                            <input type="datetime-local" value="@minStartDate" min="@minStartDate"/>
                             <p class="error"></p>
                         </div>
                     }
@@ -65,7 +67,7 @@
                     {
                         <div class="form_box">
                             <label>End of goal</label>
-                            <input type="date" />
+                            <input type="date" value="@DateTime.Now.ToString()" min="@DateTime.Now.ToString()" />
                             <p class="error"></p>
                         </div>
                     }
