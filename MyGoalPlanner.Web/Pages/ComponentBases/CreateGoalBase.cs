@@ -45,6 +45,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected string linkToImage_error = "";
         protected string prize_error = "";
 
+        protected string motivator_error = "";
+
         #endregion
 
 
@@ -205,7 +207,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
                 if (IfHasMantraMotivator)
                 {
-                    if(mantra == "")
+                    oneMotivator = true;
+
+                    if (mantra == "")
                     {
                         mantra_error = "Please enter your mantra!";
                         errorOccured = true;
@@ -214,28 +218,44 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
                 if (IfHasImageMotivator)
                 {
-                    if(linkToImage == "")
+                    oneMotivator = true;
+
+                    if (linkToImage == "")
                     {
                         linkToImage_error = "Please add link to image motivator!";
+                        errorOccured = true;
                     }
                 }
 
                 if (IfHasPrizeMotivator)
                 {
-                    if(prize == "")
+                    oneMotivator = true;
+
+                    if (prize == "")
                     {
                         prize_error = "Please ener your expected prize!";
+                        errorOccured = true;
                     }
+                }
+
+                if (!oneMotivator)
+                {
+                    errorOccured = true;
+                    motivator_error = "Please choose your motivator!";
                 }
             }
 
-            Goal goal = new Goal();
-            goal.Name = goalName;
-            goal.Description = goalDescription;
-            goal.TimeStart = timeStartOfTheGoal;
-            goal.TimeEnd = timeEndOfTheGoal;
 
-            var result = await GoalService.CreateGoal(goal);
+            if (!errorOccured)
+            {
+                Goal goal = new Goal();
+                goal.Name = goalName;
+                goal.Description = goalDescription;
+                goal.TimeStart = timeStartOfTheGoal;
+                goal.TimeEnd = timeEndOfTheGoal;
+                var result = await GoalService.CreateGoal(goal);
+            }
+            
         }
     }
 }
