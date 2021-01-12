@@ -180,7 +180,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
             minStartDate = DateTime.UtcNow.ToString("s");
 
-            Goals = (await GoalService.GetGoals()).ToList();
+            await LoadGoals();
         }
 
         public void AddStepToList()
@@ -202,6 +202,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         public async Task CheckInput()
         {
 
+        }
+
+        public async Task LoadGoals()
+        {
+            Goals = new List<Goal>();
+            Goals = (await GoalService.GetGoals()).ToList();
+            StateHasChanged();
         }
 
         public async Task CreateGoal()
@@ -269,6 +276,14 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 }
             }
 
+            if (IfHasListOfSteps)
+            {
+                for(int i = 0; i < ListOfSteps.Count; i++)
+                {
+                    await StepService.CreateStep(ListOfSteps[i]);
+                }
+            }
+
             if (!errorOccured)
             {
                 Goal goal = new Goal();
@@ -279,6 +294,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.TimeEnd = timeEndOfTheGoal;
                 var result = await GoalService.CreateGoal(goal);
             }
+
+            await LoadGoals();
             
         }
     }
