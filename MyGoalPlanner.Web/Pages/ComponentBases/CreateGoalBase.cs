@@ -276,13 +276,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 }
             }
 
-            if (IfHasListOfSteps)
-            {
-                for(int i = 0; i < ListOfSteps.Count; i++)
-                {
-                    await StepService.CreateStep(ListOfSteps[i]);
-                }
-            }
+           
 
             if (!errorOccured)
             {
@@ -293,10 +287,19 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
                 var result = await GoalService.CreateGoal(goal);
+
+
+                if (IfHasListOfSteps)
+                {
+                    for (int i = 0; i < ListOfSteps.Count; i++)
+                    {
+                        ListOfSteps[i].GoalId = result.GoalId;
+                        await StepService.CreateStep(ListOfSteps[i]);
+                    }
+                }
             }
 
             await LoadGoals();
-            
         }
     }
 }
