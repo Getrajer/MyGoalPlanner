@@ -287,16 +287,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
                 var result = await GoalService.CreateGoal(goal);
-
-
-                if (IfHasListOfSteps)
-                {
-                    for (int i = 0; i < ListOfSteps.Count; i++)
-                    {
-                        ListOfSteps[i].GoalId = result.GoalId;
-                        var r = await StepService.CreateStep(ListOfSteps[i]);
-                    }
-                }
+                
+                //ListOfSteps[0].GoalId = result.GoalId;
+                Step step = new Step();
+                step.GoalId = 1;
+                step.StepName = "Test";
+                step.StepNumber = 1;
+                var r = await StepService.CreateStep(step);
             }
 
             await LoadGoals();
