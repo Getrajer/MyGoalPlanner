@@ -125,7 +125,6 @@ namespace MyGoalPlanner.Api.Controllers
                                                  "Error deleting data");
             }
         }
-
         
     }
 }
