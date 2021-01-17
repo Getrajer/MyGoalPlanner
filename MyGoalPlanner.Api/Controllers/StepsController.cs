@@ -20,6 +20,19 @@ namespace MyGoalPlanner.Api.Controllers
             this.stepRepostitory = stepRepostitory;
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetSteps()
+        {
+            try
+            {
+                return Ok(await stepRepostitory.GetAllSteps());
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
+            }
+        } 
 
         [HttpPost]
         public async Task<ActionResult<Step>> CreateStep(Step step)
@@ -33,13 +46,34 @@ namespace MyGoalPlanner.Api.Controllers
                 else
                 {
                     var createdStep = await stepRepostitory.AddStep(step);
-                    return step;
+                    return CreatedAtAction(nameof(GetStep), new { id = createdStep.StepId }, createdStep);
                 }
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                                     "Error with posting data to the database");
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Step>> GetStep(int id)
+        {
+            try
+            {
+                var result = await stepRepostitory.GetStep(id);
+
+                if(result == null)
+                {
+                    return NotFound();
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
             }
         }
 

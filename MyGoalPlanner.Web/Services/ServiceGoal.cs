@@ -19,12 +19,12 @@ namespace MyGoalPlanner.Web.Services
 
         public async Task<Goal> CreateGoal(Goal newGoal)
         {
-            return await httpClient.PostJsonAsync<Goal>("api/goals", newGoal);
+            return await httpClient.PostJsonAsync<Goal>("api/Goals", newGoal);
         }
 
         public async Task<Goal> GetGoal(int id)
         {
-            return await httpClient.GetJsonAsync<Goal>($"api/goals/{id}");
+            return await httpClient.GetJsonAsync<Goal>($"api/Goals/{id}");
         }
 
         public async Task<IEnumerable<Goal>> GetGoals()

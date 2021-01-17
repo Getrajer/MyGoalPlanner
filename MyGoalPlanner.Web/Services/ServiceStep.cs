@@ -20,7 +20,7 @@ namespace MyGoalPlanner.Web.Services
 
         public async Task<Step> CreateStep(Step newStep)
         {
-            return await httpClient.PostJsonAsync<Step>("api/steps", newStep);
+            return await httpClient.PostJsonAsync<Step>("api/Steps", newStep);
         }
     }
 }

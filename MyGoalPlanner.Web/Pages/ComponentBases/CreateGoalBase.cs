@@ -294,7 +294,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                     for (int i = 0; i < ListOfSteps.Count; i++)
                     {
                         ListOfSteps[i].GoalId = result.GoalId;
-                        await StepService.CreateStep(ListOfSteps[i]);
+                        var r = await StepService.CreateStep(ListOfSteps[i]);
                     }
                 }
             }
