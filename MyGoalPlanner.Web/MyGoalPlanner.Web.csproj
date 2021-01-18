@@ -28,4 +28,8 @@
     <None Include="Pages\GoalDetails.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\PartialComponents\PartialBases\" />
+  </ItemGroup>
+
 </Project>
