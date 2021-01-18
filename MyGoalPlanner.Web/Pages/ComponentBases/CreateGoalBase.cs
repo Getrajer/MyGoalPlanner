@@ -307,9 +307,32 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 }
             }
 
-
+            ResetVariables();
 
             await LoadGoals();
         }
+
+
+        #region HelpingFunctions
+
+        public void ResetVariables()
+        {
+            goalName = "";
+            goalDescription = "";
+            timeStartOfTheGoal = new DateTime();
+            timeEndOfTheGoal = new DateTime();
+            linkToVideoMotivator = "";
+            mantra = "";
+            linkToImage = "";
+            prize = "";
+            
+            minStartDate = "";
+            minEndDate = "";
+
+            ListOfSteps = new List<Step>();
+        }
+
+        #endregion
+
     }
 }
