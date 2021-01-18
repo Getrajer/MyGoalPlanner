@@ -289,12 +289,25 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 var result = await GoalService.CreateGoal(goal);
                 
                 //ListOfSteps[0].GoalId = result.GoalId;
-                Step step = new Step();
+                /*Step step = new Step();
                 step.GoalId = 1;
                 step.StepName = "Test";
                 step.StepNumber = 1;
                 var r = await StepService.CreateStep(step);
+                */
+
+                for(int i = 0; i < ListOfSteps.Count; i++)
+                {
+                    Step step = new Step();
+                    step.GoalId = result.GoalId;
+                    step.StepName = ListOfSteps[i].StepName;
+                    step.StepNumber = i;
+
+                    var r = await StepService.CreateStep(step);
+                }
             }
+
+
 
             await LoadGoals();
         }
