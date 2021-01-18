@@ -22,7 +22,7 @@ namespace MyGoalPlanner.Models
         public bool HasNote { get; set; }
         public bool HasMotivator { get; set; }
 
-
+        public bool Succesfully { get; set; }
 
         //FK
         public int GoalTypeId { get; set; }
