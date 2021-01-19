@@ -1,5 +1,9 @@
-﻿<h3>ViewListOfGoals</h3>
+﻿@page "/ListOfGoals"
 
-@code {
+@inherits ViewListOfGoalsBase
 
+
+@foreach(var g in goals)
+{
+    <p>@g.Name</p>
 }
