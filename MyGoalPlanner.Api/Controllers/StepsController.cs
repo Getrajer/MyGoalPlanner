@@ -77,5 +77,20 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+
+        [HttpGet("GetOfGoalId/{id:int}")]
+        public async Task<ActionResult<Step>> GetStepsOfGoalId(int id)
+        {
+            try
+            {
+                return Ok(await stepRepostitory.GetAllStepsOfGoalId(id));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
+            }
+        }
+
     }
 }
