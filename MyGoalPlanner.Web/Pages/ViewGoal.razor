@@ -1,9 +1,10 @@
-﻿@page "/GoalDetails"
+﻿@page  "/GoalDetails"
+@page "/GoalDetails/{GoalId:int}"
 
 @inherits ViewGoalBase
 
 
-
+<p>Hi @GoalId</p>
 
 <p>
     @goal.Name

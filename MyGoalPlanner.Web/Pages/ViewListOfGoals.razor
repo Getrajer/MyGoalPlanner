@@ -2,8 +2,25 @@
 
 @inherits ViewListOfGoalsBase
 
+<head>
+    <link rel="stylesheet" href="../css/view_goals.css" />
+</head>
 
-@foreach(var g in goals)
-{
-    <p>@g.Name</p>
-}
+
+
+<div class="list_of_goals">
+    <div class="list_of_goals_container">
+
+        @foreach (var g in goals)
+        {
+            <div class="goal">
+                <NavLink class="goal_link" href="@g.GoalRoute" Match="NavLinkMatch.All">
+                    <p>@g.Goal.Name</p>
+                </NavLink>
+            </div>
+        }
+
+        
+
+    </div>
+</div>

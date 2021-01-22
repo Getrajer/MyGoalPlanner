@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
+using MyGoalPlanner.Models.ViewModels;
 using MyGoalPlanner.Web.Services;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,22 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Inject]
         public IGoalService GoalService { get; set; }
 
-        protected List<Goal> goals = new List<Goal>();
+        protected List<ViewGoalsViewModel> goals = new List<ViewGoalsViewModel>();
 
 
         protected override async Task OnInitializedAsync()
         {
-            var goalss = await GoalService.GetGoals();
-            goals = goalss.ToList();
+            var serviceGoals = await GoalService.GetGoals();
+
+                       
+            foreach(var sG in serviceGoals)
+            {
+                ViewGoalsViewModel gVM = new ViewGoalsViewModel();
+                gVM.Goal = sG;
+                gVM.GoalRoute = $"GoalDetails/{sG.GoalId}";
+                goals.Add(gVM);
+            }
+            
         }
 
 

@@ -26,8 +26,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         protected override async Task OnInitializedAsync()
         {
-            goal = await GoalService.GetGoal(19);
-            steps = await StepService.GetStepsOfGoalId(goal.GoalId);
+            goal = await GoalService.GetGoal(GoalId);
+            steps = await StepService.GetStepsOfGoalId(GoalId);
         }
 
 
