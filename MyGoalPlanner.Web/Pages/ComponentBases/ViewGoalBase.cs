@@ -22,12 +22,12 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         protected Goal goal = new Goal();
 
-        List<Step> steps = new List<Step>();
+        protected IEnumerable<Step> steps;
 
         protected override async Task OnInitializedAsync()
         {
             goal = await GoalService.GetGoal(19);
-            
+            steps = await StepService.GetStepsOfGoalId(goal.GoalId);
         }
 
 

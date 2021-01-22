@@ -8,3 +8,12 @@
 <p>
     @goal.Name
 </p>
+
+@if (steps != null)
+{
+    @foreach (var s in steps)
+    {
+        <p>@s.StepNumber / @s.StepName</p>
+    }
+
+}

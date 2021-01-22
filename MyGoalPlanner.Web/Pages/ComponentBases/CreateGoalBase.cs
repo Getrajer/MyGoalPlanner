@@ -301,7 +301,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                     Step step = new Step();
                     step.GoalId = result.GoalId;
                     step.StepName = ListOfSteps[i].StepName;
-                    step.StepNumber = i;
+                    step.StepNumber = i + 1;
 
                     var r = await StepService.CreateStep(step);
                 }

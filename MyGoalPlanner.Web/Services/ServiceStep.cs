@@ -23,7 +23,7 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.PostJsonAsync<Step>("api/Steps", newStep);
         }
 
-        public async Task<IEnumerable<Step>> GetStepsOfId(int Id)
+        public async Task<IEnumerable<Step>> GetStepsOfGoalId(int Id)
         {
             return await httpClient.GetJsonAsync<Step[]>($"api/Steps/GetOfGoalId/{Id}");
         }
