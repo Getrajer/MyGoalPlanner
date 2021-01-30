@@ -288,14 +288,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.TimeEnd = timeEndOfTheGoal;
                 var result = await GoalService.CreateGoal(goal);
                 
-                //ListOfSteps[0].GoalId = result.GoalId;
-                /*Step step = new Step();
-                step.GoalId = 1;
-                step.StepName = "Test";
-                step.StepNumber = 1;
-                var r = await StepService.CreateStep(step);
-                */
-
                 for(int i = 0; i < ListOfSteps.Count; i++)
                 {
                     Step step = new Step();
@@ -325,9 +317,18 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             mantra = "";
             linkToImage = "";
             prize = "";
-            
             minStartDate = "";
             minEndDate = "";
+
+            IfConfigureStartDate = false;
+            IfConfigureEndDate = false;
+            IfHasDeadline = false;
+            IfHasMotivator = false;
+            IfHasVideoMotivator = false;
+            IfHasMantraMotivator = false;
+            IfHasImageMotivator = false;
+            IfHasPrizeMotivator = false;
+            IfHasListOfSteps = false;
 
             ListOfSteps = new List<Step>();
         }
