@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/test.css",
+    "inputFile": "wwwroot/css/test.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/goal_details_style.css",
+    "inputFile": "wwwroot/css/goal_details_style.scss"
+  }
+]

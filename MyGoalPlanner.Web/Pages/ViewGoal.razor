@@ -7,31 +7,62 @@
     <link rel="stylesheet" href="../css/goal_details_style.css" />
 </head>
 
-<p>Hi @GoalId</p>
 
-<p>
-    @goal.Name
-</p>
-
-@if (steps != null)
-{
-    @foreach (var s in steps)
-    {
-        <p>@s.StepNumber / @s.StepName</p>
-    }
-}
-
-<section class="goal_display">
+<section id="GoalDisplay">
     <div class="goal_display_container">
 
         <div class="main_goal_display">
             <div class="main_goal_display_container">
+
+                <div class="goal_name">
+                    <h2>Goal Name: @goal.Name</h2>
+
+                    <div class="line"></div>
+                </div>
+
+                <div class="goal_description">
+                    <p>@goal.Description</p>
+                </div>
+
+                <div class="goal_time">
+                    <div class="goal_started">
+                        <p>You started the goal:</p>
+                        <p>@goal.TimeStart.Date</p>
+                    </div>
+
+                    @if (goal.Completed)
+                    {
+                        <div class="goal_started">
+                            <p>You finished goal:</p>
+                            <p>@goal.TimeEnd.Date</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="goal_started">
+                            <p>Estimated time to finish the goal:</p>
+                            <p>@goal.TimeEnd.Date</p>
+                        </div>
+                    }
+
+
+
+                </div>
 
             </div>
         </div>
 
         <div class="other_goal_information_display">
             <div class="other_goal_information_display_container">
+
+                @if (steps != null)
+                {
+                    @foreach (var s in steps)
+                    {
+                        <p>@s.StepNumber / @s.StepName</p>
+                    }
+                }
+
 
             </div>
         </div>
