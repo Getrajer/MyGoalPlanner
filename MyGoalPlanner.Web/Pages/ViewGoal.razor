@@ -7,129 +7,289 @@
     <link rel="stylesheet" href="../css/goal_details_style.css" />
 </head>
 
+@if (!editGoalToggler)
+{
+    <section id="GoalDisplay">
+        <div class="goal_display_container">
 
-<section id="GoalDisplay">
-    <div class="goal_display_container">
+            <div class="main_goal_display">
+                <div class="main_goal_display_container">
 
-        <div class="main_goal_display">
-            <div class="main_goal_display_container">
+                    @if (goal != null)
+                    {
+                        <div class="goal_name">
+                            <h2>Goal Name: @goal.Name</h2>
+                            
+                            
 
-                @if (goal != null)
-                {
-                    <div class="goal_name">
-                        <h2>Goal Name: @goal.Name</h2>
-
-                        <div class="line"></div>
-                    </div>
-
-                    <div class="goal_description">
-                        <p>@goal.Description</p>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="goal_time">
-                        <div class="goal_started">
-                            <label>You started the goal:</label>
-                            <p>@goal.TimeStart.Date</p>
+                            <div class="line"></div>
                         </div>
 
-                        @if (goal.Completed)
-                        {
+                        <div class="goal_description">
+                            <p>@goal.Description</p>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <div class="goal_time">
                             <div class="goal_started">
-                                <label>You finished goal:</label>
-                                <p>@goal.TimeEnd.Date</p>
-                            </div>
-                        }
-                        else if (goal.TimeEnd == null)
-                        {
-
-                        }
-                        else
-                        {
-                            <div class="goal_started">
-                                <label>Estimated time to finish the goal:</label>
-                                <p>@goal.TimeEnd.Date</p>
-                            </div>
-                        }
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="motivators">
-
-                    </div>
-                }
-                else
-                {
-                    <div class="loader"></div>
-                }
-
-            </div>
-        </div>
-
-        <div class="other_goal_information_display">
-            <div class="other_goal_information_display_container">
-
-                <div class="steps">
-                    @if (steps != null)
-                    {
-                        <div class="steps_list">
-
-                            <div class="step_labels">
-                                <div class="name_l">
-                                    <h4>Step</h4>
-                                </div>
-
-                                <div class="completed_l">
-                                    <h4>Completed</h4>
-                                </div>
+                                <label>You started the goal:</label>
+                                <p>@goal.TimeStart.Date</p>
                             </div>
 
-
-                            @foreach (var s in steps)
+                            @if (goal.Completed)
                             {
-                                <div class="step">
-                                    <div class="step_number">
-                                        <p>@s.Step.StepNumber.</p>
-                                    </div>
-                                    <div class="step_name">
-                                        <p>@s.Step.StepName</p>
-                                    </div>
-                                    <div class="if_completed_step">
-                                        @if (s.Step.StepCompleted)
-                                        {
-                                            <button class="check_box" @onclick ="() => ChangeStepComplition(s.StepListId)">✓</button>
-                                        }
-                                        else
-                                        {
-                                            <button class="check_box" @onclick ="() => ChangeStepComplition(s.StepListId)"></button>
-                                        }
-                                    </div>
+                                <div class="goal_started">
+                                    <label>You finished goal:</label>
+                                    <p>@goal.TimeEnd.Date</p>
                                 </div>
+                            }
+                            else if (goal.TimeEnd == null)
+                            {
 
-
+                            }
+                            else
+                            {
+                                <div class="goal_started">
+                                    <label>Estimated time to finish the goal:</label>
+                                    <p>@goal.TimeEnd.Date</p>
+                                </div>
                             }
                         </div>
 
+                        <div class="line"></div>
+
+                        <div class="motivators">
+
+                        </div>
                     }
                     else
                     {
                         <div class="loader"></div>
                     }
+
                 </div>
-
-                <div class="edit_button">
-                    <button>Edit</button>
-                </div>
-
-                <div class="save_changes_button">
-                    <button>Save Changes</button>
-                </div>
-
-
             </div>
-        </div>
 
-    </div>
-</section>
+            <div class="other_goal_information_display">
+                <div class="other_goal_information_display_container">
+
+                    <div class="steps">
+                        @if (steps != null)
+                        {
+                            <div class="steps_list">
+
+                                <div class="step_labels">
+                                    <div class="name_l">
+                                        <h4>Step</h4>
+                                    </div>
+
+                                    <div class="completed_l">
+                                        <h4>Completed</h4>
+                                    </div>
+                                </div>
+
+
+                                @foreach (var s in steps)
+                                {
+                                    <div class="step">
+                                        <div class="step_number">
+                                            <p>@s.Step.StepNumber.</p>
+                                        </div>
+                                        <div class="step_name">
+                                            <p>@s.Step.StepName</p>
+                                        </div>
+                                        <div class="if_completed_step">
+                                            @if (s.Step.StepCompleted)
+                                            {
+                                                <button class="check_box" @onclick="() => ChangeStepComplition(s.StepListId)">✓</button>
+                                            }
+                                            else
+                                            {
+                                                <button class="check_box" @onclick="() => ChangeStepComplition(s.StepListId)"></button>
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                }
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="loader"></div>
+                        }
+                    </div>
+
+                    <div class="edit_button">
+                        <button @onclick="ToggleGoalForm">Edit</button>
+                    </div>
+
+                    <div class="save_changes_button">
+                        @if (saveChangesLoader)
+                        {
+                            <button>Saving...</button>
+                        }
+                        else
+                        {
+                            <button @onclick="SaveChanges">Save Changes</button>
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+}
+else
+{
+    <section id="GoalDisplay">
+        <div class="goal_display_container">
+
+            <div class="main_goal_display">
+                <div class="main_goal_display_container">
+
+                    @if (goal != null)
+                    {
+                        <div class="goal_name">
+                            <div class="form_box">
+                                <label>Goal Name</label>
+                                <input @bind="goal.Name" />
+                                <p class="error"></p>
+                            </div>
+
+                            <div class="line"></div>
+                        </div>
+
+                        <div class="goal_description">
+                            <div class="form_box">
+                                <label>Goal Description</label>
+                                <textarea @bind="goal.Description"></textarea>
+                                <p class="error"></p>
+                            </div>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <div class="goal_time">
+                            <div class="goal_started">
+                                <div class="form_box">
+                                    <label>Start of goal</label>
+                                    <input @bind="@goal.TimeStart" type="datetime-local"/>
+                                    <p class="error"></p>
+                                </div>
+
+                            </div>
+
+                            @if (goal.Completed)
+                            {
+                                <div class="goal_started">
+                                    <label>You finished goal:</label>
+                                    <p>@goal.TimeEnd.Date</p>
+                                </div>
+                            }
+                            else if (goal.TimeEnd == null)
+                            {
+
+                            }
+                            else
+                            {
+                                <div class="goal_started">
+                                    <div class="form_box">
+                                        <label>Planned time to finish the goal</label>
+                                        <input @bind="@goal.TimeEnd" type="datetime-local"/>
+                                        <p class="error"></p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="line"></div>
+
+                        <div class="motivators">
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="loader"></div>
+                    }
+
+                </div>
+            </div>
+
+            <div class="other_goal_information_display">
+                <div class="other_goal_information_display_container">
+
+                    <div class="steps">
+                        @if (steps != null)
+                        {
+                            <div class="steps_list">
+
+                                <div class="step_labels">
+                                    <div class="name_l">
+                                        <h4>Step</h4>
+                                    </div>
+
+                                    <div class="completed_l">
+                                        <h4>Completed</h4>
+                                    </div>
+                                </div>
+
+
+                                @foreach (var s in steps)
+                                {
+                                    <div class="step">
+                                        <div class="step_number">
+                                            <p>@s.Step.StepNumber.</p>
+                                        </div>
+                                        <div class="step_name">
+                                            <input @bind="s.Step.StepName"/>
+                                            <p class="error"></p>
+                                        </div>
+                                        <div class="if_completed_step">
+                                            
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="step_button_container">
+                                    <button>Add step</button>
+                                </div>
+
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="loader"></div>
+                        }
+                    </div>
+
+                    <div class="edit_button">
+                        <button @onclick="ToggleGoalForm">Cancel</button>
+                    </div>
+
+                    <div class="save_changes_button">
+                        @if (saveChangesLoader)
+                        {
+                            <button>Saving...</button>
+                        }
+                        else
+                        {
+                            <button @onclick="SaveChanges">Save Changes</button>
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+}

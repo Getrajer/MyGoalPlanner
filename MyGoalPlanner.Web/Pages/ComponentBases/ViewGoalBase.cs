@@ -21,6 +21,10 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Parameter]
         public int GoalId { get; set; }
 
+
+        protected bool saveChangesLoader = false;
+        protected bool editGoalToggler = false;
+
         protected Goal goal = new Goal();
 
         protected List<StepViewModel> steps = new List<StepViewModel>();
@@ -41,6 +45,18 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
         }
 
+
+        protected async Task SaveChanges()
+        {
+            saveChangesLoader = true;
+            for(int i = 0; i < steps.Count; i++)
+            {
+                var result = await StepService.EditStep(steps[i].Step);
+            }
+            saveChangesLoader = false;
+        }
+
+
         protected void ChangeStepComplition(int stepId)
         {
             if(steps[stepId].Step.StepCompleted)
@@ -53,5 +69,17 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
         }
 
+
+        public void ToggleGoalForm()
+        {
+            if (editGoalToggler)
+            {
+                editGoalToggler = false;
+            }
+            else
+            {
+                editGoalToggler = true;
+            }
+        }
     }
 }
