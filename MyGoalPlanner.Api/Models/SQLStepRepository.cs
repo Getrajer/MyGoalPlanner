@@ -62,6 +62,7 @@ namespace MyGoalPlanner.Api.Models
             {
                 result.StepName = step.StepName;
                 result.StepNumber = step.StepNumber;
+                result.StepCompleted = step.StepCompleted;
 
                 await appDbContext.SaveChangesAsync();
 

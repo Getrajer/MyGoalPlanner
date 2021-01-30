@@ -56,6 +56,30 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<ActionResult<Step>> UpdateStep(Step step)
+        {
+            try
+            {
+                var stepToUpdate = await stepRepostitory.GetStep(step.StepId);
+
+                if (stepToUpdate == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var updatedStep = await stepRepostitory.UpdateStep(step);
+                    return step;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                    "Error with updating data");
+            }
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Step>> GetStep(int id)
         {
