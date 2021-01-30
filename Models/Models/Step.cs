@@ -11,6 +11,7 @@ namespace MyGoalPlanner.Models.Models
         public int StepNumber { get; set; }
         [StringLength(200)]
         public string StepName { get; set; }
+        public bool StepCompleted { get; set; }
 
         //FK
         public int GoalId { get; set; }

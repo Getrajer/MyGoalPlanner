@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
 using MyGoalPlanner.Models.Models;
+using MyGoalPlanner.Models.ViewModels;
 using MyGoalPlanner.Web.Services;
 using System;
 using System.Collections.Generic;
@@ -22,14 +23,35 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         protected Goal goal = new Goal();
 
-        protected IEnumerable<Step> steps;
+        protected List<StepViewModel> steps = new List<StepViewModel>();
 
         protected override async Task OnInitializedAsync()
         {
             goal = await GoalService.GetGoal(GoalId);
-            steps = await StepService.GetStepsOfGoalId(GoalId);
+            IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
+
+            int i = 0;
+            foreach(var s in stepsI)
+            {
+                StepViewModel stepModel = new StepViewModel();
+                stepModel.Step = s;
+                stepModel.StepListId = i;
+                steps.Add(stepModel);
+                i++;
+            }
         }
 
+        protected void ChangeStepComplition(int stepId)
+        {
+            if(steps[stepId].Step.StepCompleted)
+            {
+                steps[stepId].Step.StepCompleted = false;
+            }
+            else
+            {
+                steps[stepId].Step.StepCompleted = true;
+            }
+        }
 
     }
 }

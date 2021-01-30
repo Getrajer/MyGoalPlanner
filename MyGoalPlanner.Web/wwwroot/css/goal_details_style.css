@@ -51,10 +51,10 @@
       text-align: center;
       font-weight: 600; }
     #GoalDisplay .other_goal_information_display .name_l {
-      padding: 0.3em 0;
+      padding: 0.3em 0 0.5em 0;
       border-bottom: 1px solid rgba(30, 32, 74, 0.61); }
     #GoalDisplay .other_goal_information_display .completed_l {
-      padding: 0.3em 0;
+      padding: 0.3em 0 0.5em 0;
       border-bottom: 1px solid rgba(30, 32, 74, 0.61); }
     #GoalDisplay .other_goal_information_display .step {
       display: grid;
@@ -76,4 +76,35 @@
       align-items: center; }
     #GoalDisplay .other_goal_information_display .check_box {
       height: 25px;
-      width: 25px; }
+      width: 25px;
+      outline: unset; }
+  #GoalDisplay .save_changes_button {
+    position: absolute;
+    bottom: 20px;
+    right: 10px; }
+    #GoalDisplay .save_changes_button button {
+      color: white;
+      width: 150px;
+      padding: 0.7em 0;
+      text-align: center;
+      border: none;
+      background-color: #128609;
+      font-weight: 600;
+      transition: 0.5s background-color; }
+      #GoalDisplay .save_changes_button button:hover {
+        background-color: #19a90e; }
+  #GoalDisplay .edit_button {
+    position: absolute;
+    bottom: 20px;
+    right: 170px; }
+    #GoalDisplay .edit_button button {
+      color: white;
+      width: 150px;
+      padding: 0.7em 0;
+      text-align: center;
+      border: none;
+      background-color: #451c8a;
+      font-weight: 600;
+      transition: 0.5s background-color; }
+      #GoalDisplay .edit_button button:hover {
+        background-color: #5726a9; }

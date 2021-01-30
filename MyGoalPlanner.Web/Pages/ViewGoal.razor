@@ -41,6 +41,10 @@
                                 <p>@goal.TimeEnd.Date</p>
                             </div>
                         }
+                        else if (goal.TimeEnd == null)
+                        {
+
+                        }
                         else
                         {
                             <div class="goal_started">
@@ -81,26 +85,34 @@
                                     <h4>Completed</h4>
                                 </div>
                             </div>
-                            
+
 
                             @foreach (var s in steps)
                             {
                                 <div class="step">
                                     <div class="step_number">
-                                        <p>@s.StepNumber.</p>
+                                        <p>@s.Step.StepNumber.</p>
                                     </div>
                                     <div class="step_name">
-                                        <p>@s.StepName</p>
+                                        <p>@s.Step.StepName</p>
                                     </div>
                                     <div class="if_completed_step">
-                                        <button class="check_box"></button>
+                                        @if (s.Step.StepCompleted)
+                                        {
+                                            <button class="check_box" @onclick ="() => ChangeStepComplition(s.StepListId)">✓</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="check_box" @onclick ="() => ChangeStepComplition(s.StepListId)"></button>
+                                        }
+
                                     </div>
                                 </div>
-                                
-                                
+
+
                             }
                         </div>
-                       
+
                     }
                     else
                     {
@@ -108,7 +120,13 @@
                     }
                 </div>
 
-                
+                <div class="edit_button">
+                    <button>Edit</button>
+                </div>
+
+                <div class="save_changes_button">
+                    <button>Save Changes</button>
+                </div>
 
 
             </div>

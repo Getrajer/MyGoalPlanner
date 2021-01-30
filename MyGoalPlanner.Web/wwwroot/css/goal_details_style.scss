@@ -75,12 +75,12 @@
         }
 
         .name_l {
-            padding: 0.3em 0;
+            padding: 0.3em 0 0.5em 0;
             border-bottom: 1px solid rgba(30, 32, 74, 0.61);
         }
 
         .completed_l {
-            padding: 0.3em 0;
+            padding: 0.3em 0 0.5em 0;
             border-bottom: 1px solid rgba(30, 32, 74, 0.61);
         }
 
@@ -113,6 +113,49 @@
         .check_box {
             height: 25px;
             width: 25px;
+            outline: unset;
+        }
+    }
+
+    .save_changes_button {
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+
+        button {
+            color: white;
+            width: 150px;
+            padding: 0.7em 0;
+            text-align: center;
+            border: none;
+            background-color: #128609;
+            font-weight: 600;
+            transition: 0.5s background-color;
+
+            &:hover {
+                background-color: #19a90e;
+            }
+        }
+    }
+
+    .edit_button {
+        position: absolute;
+        bottom: 20px;
+        right: 170px;
+
+        button {
+            color: white;
+            width: 150px;
+            padding: 0.7em 0;
+            text-align: center;
+            border: none;
+            background-color: #451c8a;
+            font-weight: 600;
+            transition: 0.5s background-color;
+
+            &:hover {
+                background-color: #5726a9;
+            }
         }
     }
 }
