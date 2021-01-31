@@ -181,12 +181,33 @@
             height: 200px;
         }
 
-        .step_button_container{
-            text-align:center;
+        .step_button_container {
+            text-align: center;
             padding: 1em 0;
 
-            button{
+            button {
                 padding: 0.3em 0.5em;
+            }
+        }
+
+        .step{
+            position: relative;
+        }
+
+        .step_delete_class{
+            position: absolute;
+            width: 55%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.10);
+            display:flex;
+            justify-content:center;
+            align-content:center;
+            align-items:center;
+
+            .line_delete{
+                width: 100%;
+                height: 1px;
+                background-color: red;
             }
         }
     }

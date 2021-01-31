@@ -116,5 +116,19 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<ActionResult<Step>> DeleteStep(int id)
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -104,14 +104,40 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             stepVM.Step = step;
             stepVM.Step.StepNumber = steps.Count + 1;
             stepVM.Step.GoalId = goal.GoalId;
+            stepVM.Step.StepId = 0;
             steps.Add(stepVM);
+        }
+
+        public void DeleteStep(int id)
+        {
+            if(steps[id].Step.StepId == 0)
+            {
+                steps.RemoveAt(id);
+            }
+            else
+            {
+                if (steps[id].ToBeRemoved)
+                {
+                    steps[id].ToBeRemoved = false;
+                }
+                else
+                {
+                    steps[id].ToBeRemoved = true;
+                }
+            }
+
+            for(int i = 0; i < steps.Count; i++)
+            {
+                if(steps[i].ToBeRemoved != true)
+                {
+                    steps[i].Step.StepNumber = i;
+                }
+            }
         }
 
 
         public async Task UpdateGoal()
         {
-            
-
             bool errorOccured = false;
 
             if (goal.Name == "")
@@ -142,7 +168,14 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
                 for(int i = 0; i < steps.Count; i++)
                 {
-                    var stepResult = await StepService.UpdateStep(steps[i].Step);
+                    if(steps[i].Step.StepId == 0)
+                    {
+                        var stepResult = await StepService.CreateStep(steps[i].Step);
+                    }
+                    else
+                    {
+                        var stepResult = await StepService.UpdateStep(steps[i].Step);
+                    }
                 }
 
                 saveEditLoader = false;

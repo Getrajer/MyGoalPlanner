@@ -28,14 +28,19 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.PutJsonAsync<Step>($"api/Steps", step);
         }
 
-        public async Task<IEnumerable<Step>> GetStepsOfGoalId(int Id)
+        public async Task<IEnumerable<Step>> GetStepsOfGoalId(int id)
         {
-            return await httpClient.GetJsonAsync<Step[]>($"api/Steps/GetOfGoalId/{Id}");
+            return await httpClient.GetJsonAsync<Step[]>($"api/Steps/GetOfGoalId/{id}");
         }
 
-        public async Task<Step> GetStep(int Id)
+        public async Task<Step> GetStep(int id)
         {
-            return await httpClient.GetJsonAsync<Step>($"api/Steps/{Id}");
+            return await httpClient.GetJsonAsync<Step>($"api/Steps/{id}");
+        }
+
+        public Task<Step> DeleteStep(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

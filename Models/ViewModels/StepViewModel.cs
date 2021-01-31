@@ -10,5 +10,6 @@ namespace MyGoalPlanner.Models.ViewModels
         public Step Step { get; set; }
         public int StepListId { get; set; }
         public string StepErrorMessage { get; set; }
+        public bool ToBeRemoved { get; set; }
     }
 }

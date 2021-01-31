@@ -247,15 +247,29 @@
                                     {
                                         <div class="step">
                                             <div class="step_number">
-                                                <p>@s.Step.StepNumber.</p>
+                                                <p>@(s.StepListId + 1)</p>
                                             </div>
                                             <div class="step_name">
                                                 <input @bind="s.Step.StepName" />
                                                 <p class="error">@s.StepErrorMessage</p>
                                             </div>
                                             <div class="if_completed_step">
-
+                                                @if (s.ToBeRemoved)
+                                                {
+                                                    <button class="check_box" @onclick="() => DeleteStep(s.StepListId)">✓</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="check_box" @onclick="() => DeleteStep(s.StepListId)">X</button>
+                                                }
                                             </div>
+
+                                            @if (s.ToBeRemoved)
+                                            {
+                                                <div class="step_delete_class">
+                                                    <div class="line_delete"></div>
+                                                </div>
+                                            }
                                         </div>
                                     }
 
