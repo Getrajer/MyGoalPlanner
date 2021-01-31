@@ -80,7 +80,7 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet]
         public async Task<ActionResult<Step>> GetStep(int id)
         {
             try

@@ -42,7 +42,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         #endregion
 
 
-        #region Form_Input_Variables
+        #region Form_Error_Variables
 
         protected string goalName_error = "";
         protected string goalDescription_error = "";

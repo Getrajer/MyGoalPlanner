@@ -31,5 +31,10 @@ namespace MyGoalPlanner.Web.Services
         {
             return await httpClient.GetJsonAsync<Goal[]>("api/Goals");
         }
+
+        public async Task<Goal> UpdateGoal(Goal updatedGoal)
+        {
+            return await httpClient.PutJsonAsync<Goal>($"api/Goals", updatedGoal);
+        }
     }
 }

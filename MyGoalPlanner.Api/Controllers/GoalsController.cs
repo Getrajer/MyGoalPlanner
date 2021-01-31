@@ -78,24 +78,20 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<Goal>> UpdateGoal(int id, Goal goal)
+        [HttpPut]
+        public async Task<ActionResult<Goal>> UpdateGoal(Goal updatedGoal)
         {
             try
             {
-                if(id != goal.GoalId)
-                {
-                    return BadRequest("Goal ID mistmach");
-                }
-
-                var goalToUpdate = await goalRepository.GetGoal(id);
+                
+                var goalToUpdate = await goalRepository.GetGoal(updatedGoal.GoalId);
 
                 if(goalToUpdate == null)
                 {
-                    return NotFound($"Goal with Id = {id} not found");
+                    return NotFound($"Goal with Id = {updatedGoal.GoalId} not found");
                 }
 
-                return await goalRepository.UpdateGoal(goal);
+                return await goalRepository.UpdateGoal(updatedGoal);
             }
             catch (Exception)
             {

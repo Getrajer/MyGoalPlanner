@@ -11,5 +11,6 @@ namespace MyGoalPlanner.Web.Services
         Task<IEnumerable<Goal>> GetGoals();
         Task<Goal> GetGoal(int id);
         Task<Goal> CreateGoal(Goal newGoal);
+        Task<Goal> UpdateGoal(Goal updatedGoal);
     }
 }

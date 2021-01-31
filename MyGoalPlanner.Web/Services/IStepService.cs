@@ -10,6 +10,7 @@ namespace MyGoalPlanner.Web.Services
     {
         Task<Step> CreateStep(Step newStep);
         Task<IEnumerable<Step>> GetStepsOfGoalId(int Id);
-        Task<Step> EditStep(Step step);
+        Task<Step> UpdateStep(Step step);
+        Task<Step> GetStep(int Id);
     }
 }

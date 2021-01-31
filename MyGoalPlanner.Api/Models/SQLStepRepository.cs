@@ -48,9 +48,18 @@ namespace MyGoalPlanner.Api.Models
 
         public async Task<Step> GetStep(int stepId)
         {
-            return await appDbContext.Steps
+            Step step = await appDbContext.Steps
                 .FirstOrDefaultAsync(e => e.StepId == stepId);
+            if(step == null)
+            {
+                return null;
+            }
+            else
+            {
+                return step;
+            }
 
+            
         }
 
         public async Task<Step> UpdateStep(Step step)

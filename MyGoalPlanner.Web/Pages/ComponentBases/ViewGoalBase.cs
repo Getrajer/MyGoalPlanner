@@ -24,10 +24,25 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         protected bool saveChangesLoader = false;
         protected bool editGoalToggler = false;
-
         protected Goal goal = new Goal();
-
         protected List<StepViewModel> steps = new List<StepViewModel>();
+        protected bool saveEditLoader = false;
+
+
+        #region Form_Error_Variables
+
+        protected string goalName_error = "";
+        protected string goalDescription_error = "";
+        protected string timeStartOfTheGoal_error;
+        protected string timeEndOfTheGoal_error;
+        protected string linkToVideoMotivator_error = "";
+        protected string mantra_error = "";
+        protected string linkToImage_error = "";
+        protected string prize_error = "";
+        protected string motivator_error = "";
+
+        #endregion
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -51,7 +66,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             saveChangesLoader = true;
             for(int i = 0; i < steps.Count; i++)
             {
-                var result = await StepService.EditStep(steps[i].Step);
+                var result = await StepService.UpdateStep(steps[i].Step);
             }
             saveChangesLoader = false;
         }
@@ -69,7 +84,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
         }
 
-
         public void ToggleGoalForm()
         {
             if (editGoalToggler)
@@ -80,6 +94,61 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             {
                 editGoalToggler = true;
             }
+        }
+
+        public void AddNewStep()
+        {
+            StepViewModel stepVM = new StepViewModel();
+            Step step = new Step();
+            stepVM.StepListId = steps.Count;
+            stepVM.Step = step;
+            stepVM.Step.StepNumber = steps.Count + 1;
+            stepVM.Step.GoalId = goal.GoalId;
+            steps.Add(stepVM);
+        }
+
+
+        public async Task UpdateGoal()
+        {
+            
+
+            bool errorOccured = false;
+
+            if (goal.Name == "")
+            {
+                goalName_error = "Please enter a name for your goal";
+                errorOccured = true;
+            }
+
+            if (goal.HasMotivator)
+            {
+                bool oneMotivator = false;
+            }
+
+            for(int i = 0; i < steps.Count; i++)
+            {
+                if(steps[i].Step.StepName == "")
+                {
+                    errorOccured = true;
+                    steps[i].StepErrorMessage = "Please write name for your step!";
+                }
+            }
+
+            if (!errorOccured)
+            {
+                saveEditLoader = true;
+
+                var goalResult = await GoalService.UpdateGoal(goal);
+
+                for(int i = 0; i < steps.Count; i++)
+                {
+                    var stepResult = await StepService.UpdateStep(steps[i].Step);
+                }
+
+                saveEditLoader = false;
+                editGoalToggler = false;
+            }
+
         }
     }
 }
