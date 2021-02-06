@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
+using MyGoalPlanner.Models.Enum;
 using MyGoalPlanner.Models.Models;
 using MyGoalPlanner.Models.ViewModels;
 using MyGoalPlanner.Web.Services;
@@ -17,6 +18,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         [Inject]
         public IStepService StepService { get; set; }
+
+        [Inject]
+        public IMotivatorService MotivatorService { get; set; }
 
         public IEnumerable<Goal> Goals { get; set; }
 
@@ -286,17 +290,64 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.Description = goalDescription;
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
+
+                if (IfHasImageMotivator) goal.HasMotivator = true;
+                if (IfHasListOfSteps) goal.HasListOfSteps = true;
+
                 var result = await GoalService.CreateGoal(goal);
                 
-                for(int i = 0; i < ListOfSteps.Count; i++)
+                if (IfHasListOfSteps)
                 {
-                    Step step = new Step();
-                    step.GoalId = result.GoalId;
-                    step.StepName = ListOfSteps[i].StepName;
-                    step.StepNumber = i + 1;
+                    for (int i = 0; i < ListOfSteps.Count; i++)
+                    {
+                        Step step = new Step();
+                        step.GoalId = result.GoalId;
+                        step.StepName = ListOfSteps[i].StepName;
+                        step.StepNumber = i + 1;
 
-                    var r = await StepService.CreateStep(step);
+                        var r = await StepService.CreateStep(step);
+                    }
                 }
+                
+                if (IfHasMotivator)
+                {
+                    if (IfHasVideoMotivator)
+                    {
+                        Motivator motivator = new Motivator();
+                        motivator.GoalId = result.GoalId;
+                        motivator.MotivatorLink = linkToVideoMotivator;
+                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        var r = await MotivatorService.CreateMotivator(motivator);
+                    }
+
+                    if (IfHasMantraMotivator)
+                    {
+                        Motivator motivator = new Motivator();
+                        motivator.GoalId = result.GoalId;
+                        motivator.MotivatorLink = linkToImage;
+                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        var r = await MotivatorService.CreateMotivator(motivator);
+                    }
+
+                    if (IfHasImageMotivator)
+                    {
+                        Motivator motivator = new Motivator();
+                        motivator.GoalId = result.GoalId;
+                        motivator.MotivatorText = mantra;
+                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        var r = await MotivatorService.CreateMotivator(motivator);
+                    }
+
+                    if (IfHasPrizeMotivator)
+                    {
+                        Motivator motivator = new Motivator();
+                        motivator.GoalId = result.GoalId;
+                        motivator.MotivatorText = prize;
+                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        var r = await MotivatorService.CreateMotivator(motivator);
+                    }
+                }
+
             }
 
             ResetVariables();

@@ -56,7 +56,6 @@ namespace MyGoalPlanner.Api.Models
                 result.MotivatorLink = motivator.MotivatorLink;
                 result.MotivatorName = motivator.MotivatorName;
                 result.MotivatorText = motivator.MotivatorText;
-                result.Prize = motivator.Prize;
 
                 await appDbContext.SaveChangesAsync();
 

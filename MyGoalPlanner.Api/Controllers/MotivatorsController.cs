@@ -11,11 +11,11 @@ namespace MyGoalPlanner.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MotivatorController : ControllerBase
+    public class MotivatorsController : ControllerBase
     {
         private readonly IMotivatorRepository motivatorRepository;
 
-        public MotivatorController(IMotivatorRepository motivatorRepository)
+        public MotivatorsController(IMotivatorRepository motivatorRepository)
         {
             this.motivatorRepository = motivatorRepository;
         }
