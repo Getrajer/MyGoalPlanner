@@ -36,14 +36,14 @@
                             <div class="goal_time">
                                 <div class="goal_started">
                                     <label>You started the goal:</label>
-                                    <p>@goal.TimeStart.Date</p>
+                                    <p>@goal.TimeStart.Date.ToString("dd MMMM yyyy")</p>
                                 </div>
 
                                 @if (goal.Completed)
                                 {
                                     <div class="goal_started">
                                         <label>You finished goal:</label>
-                                        <p>@goal.TimeEnd.Date</p>
+                                        <p>@goal.TimeEnd.Date.ToString("dd MMMM yyyy")</p>
                                     </div>
                                 }
                                 else if (goal.TimeEnd == null)
@@ -54,7 +54,7 @@
                                 {
                                     <div class="goal_started">
                                         <label>Estimated time to finish the goal:</label>
-                                        <p>@goal.TimeEnd.Date</p>
+                                        <p>@goal.TimeEnd.Date.ToString("dd MMMM yyyy")</p>
                                     </div>
                                 }
                             </div>

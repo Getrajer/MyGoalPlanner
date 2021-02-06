@@ -1,0 +1,62 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using MyGoalPlanner.Api.Models;
+using MyGoalPlanner.Models.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MyGoalPlanner.Api.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MotivatorController : ControllerBase
+    {
+        private readonly IMotivatorRepository motivatorRepository;
+
+        public MotivatorController(IMotivatorRepository motivatorRepository)
+        {
+            this.motivatorRepository = motivatorRepository;
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult<Motivator>> CreateGoal(Motivator motivator)
+        {
+            try
+            {
+                if(motivator == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    var createdMotivator = await motivatorRepository.AddMotivator(motivator);
+
+                    return createdMotivator;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                    "Error with posting data to the database");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetMotivatorsOfGoal(int goalId)
+        {
+            try
+            {
+                return Ok(await motivatorRepository.GetAllMotivatorsOfGoal(goalId));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+    }
+}

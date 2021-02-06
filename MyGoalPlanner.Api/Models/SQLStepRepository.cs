@@ -37,8 +37,8 @@ namespace MyGoalPlanner.Api.Models
 
         public async Task<IEnumerable<Step>> GetAllStepsOfGoalId(int GoalId)
         {
-            List<Step> steps = await appDbContext.Steps.ToListAsync();
-            return steps.Where(s => s.GoalId == GoalId);
+            //List<Step> steps = await appDbContext.Steps.ToListAsync();
+            return appDbContext.Steps.Where(s => s.GoalId == GoalId);
         }
 
         public async Task<IEnumerable<Step>> GetAllSteps()

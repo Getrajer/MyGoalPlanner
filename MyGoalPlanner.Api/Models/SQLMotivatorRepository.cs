@@ -35,9 +35,9 @@ namespace MyGoalPlanner.Api.Models
             }
         }
 
-        public async Task<IEnumerable<Motivator>> GetAllMotivators()
+        public async Task<IEnumerable<Motivator>> GetAllMotivatorsOfGoal(int goalId)
         {
-            return await appDbContext.Motivators.ToListAsync();
+            return appDbContext.Motivators.Where(m => m.GoalId == goalId);
         }
 
         public async Task<Motivator> GetMotivator(int motivatorId)

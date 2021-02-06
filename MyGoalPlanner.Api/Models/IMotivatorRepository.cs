@@ -8,7 +8,7 @@ namespace MyGoalPlanner.Api.Models
 {
     public interface IMotivatorRepository
     {
-        Task<IEnumerable<Motivator>> GetAllMotivators();
+        Task<IEnumerable<Motivator>> GetAllMotivatorsOfGoal(int goalId);
         Task<Motivator> GetMotivator(int motivatorId);
         Task<Motivator> AddMotivator(Motivator motivator);
         Task<Motivator> UpdateMotivator(Motivator motivator);

@@ -16,6 +16,7 @@ namespace MyGoalPlanner.Models.Models
         public string MotivatorText { get; set; }
         [StringLength(100)]
         public string Prize { get; set; }
+        public int GoalId { get; set; }
 
     }
 }
