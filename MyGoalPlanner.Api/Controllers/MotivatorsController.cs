@@ -44,7 +44,7 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("GetOfGoalId/{goalId:int}")]
         public async Task<ActionResult> GetMotivatorsOfGoal(int goalId)
         {
             try
@@ -53,7 +53,8 @@ namespace MyGoalPlanner.Api.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
             }
         }
 

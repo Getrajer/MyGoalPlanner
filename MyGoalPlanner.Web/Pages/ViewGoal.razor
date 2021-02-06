@@ -62,6 +62,17 @@
                             <div class="line"></div>
 
                             <div class="motivators">
+                                @if (motivators != null)
+                                {
+                                    @foreach (var m in motivators)
+                                    {
+                                        <p>@m.Motivator.MotivatorName</p>
+                                    }
+                                }
+                                else
+                                {
+
+                                }
 
                             </div>
                         }

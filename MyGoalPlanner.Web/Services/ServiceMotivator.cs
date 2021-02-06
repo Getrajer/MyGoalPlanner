@@ -19,17 +19,17 @@ namespace MyGoalPlanner.Web.Services
 
         public async Task<Motivator> CreateMotivator(Motivator newMotivator)
         {
-            return await httpClient.PostJsonAsync<Motivator>("api/Motivator", newMotivator);
+            return await httpClient.PostJsonAsync<Motivator>("api/Motivators", newMotivator);
         }
 
         public async Task<Motivator> EditMotivator(Motivator editedMotivator)
         {
-            return await httpClient.PutJsonAsync<Motivator>($"api/Motivator", editedMotivator);
+            return await httpClient.PutJsonAsync<Motivator>($"api/Motivators", editedMotivator);
         }
 
         public async Task<IEnumerable<Motivator>> GetMotivatorsOfGoal(int goalId)
         {
-            return await httpClient.GetJsonAsync<Motivator[]>($"api/Motivator");
+            return await httpClient.GetJsonAsync<Motivator[]>($"api/Motivators/GetOfGoalId/{goalId}");
         }
     }
 }

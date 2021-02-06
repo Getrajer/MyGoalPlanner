@@ -102,12 +102,12 @@ namespace MyGoalPlanner.Api.Controllers
         }
 
 
-        [HttpGet("GetOfGoalId/{id:int}")]
-        public async Task<ActionResult<Step>> GetStepsOfGoalId(int id)
+        [HttpGet("GetOfGoalId/{goalId:int}")]
+        public async Task<ActionResult<Step>> GetStepsOfGoalId(int goalId)
         {
             try
             {
-                return Ok(await stepRepostitory.GetAllStepsOfGoalId(id));
+                return Ok(await stepRepostitory.GetAllStepsOfGoalId(goalId));
             }
             catch (Exception)
             {

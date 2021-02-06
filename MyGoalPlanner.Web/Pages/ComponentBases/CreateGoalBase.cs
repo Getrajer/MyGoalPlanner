@@ -56,7 +56,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected string mantra_error = "";
         protected string linkToImage_error = "";
         protected string prize_error = "";
-
         protected string motivator_error = "";
 
         #endregion
@@ -194,18 +193,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             ListOfSteps.Add(newStep);
         }
 
-        public async void RemoveStepById(int Id)
+        public void RemoveStepById(int Id)
         {
             ListOfSteps.RemoveAt(Id - 1);
             for(int i = 0; i < ListOfSteps.Count; i++)
             {
                 ListOfSteps[i].StepId = i + 1;
             }
-        }
-
-        public async Task CheckInput()
-        {
-
         }
 
         public async Task LoadGoals()
@@ -280,7 +274,10 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 }
             }
 
-           
+            if(ListOfSteps.Count > 0)
+            {
+                IfHasListOfSteps = true;
+            }
 
             if (!errorOccured)
             {
@@ -291,7 +288,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
 
-                if (IfHasImageMotivator) goal.HasMotivator = true;
+                if (IfHasMotivator) goal.HasMotivator = true;
                 if (IfHasListOfSteps) goal.HasListOfSteps = true;
 
                 var result = await GoalService.CreateGoal(goal);
@@ -325,7 +322,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                         Motivator motivator = new Motivator();
                         motivator.GoalId = result.GoalId;
                         motivator.MotivatorLink = linkToImage;
-                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        motivator.MotivatorName = MotivatorTypes.Mantra.ToString();
                         var r = await MotivatorService.CreateMotivator(motivator);
                     }
 
@@ -334,7 +331,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                         Motivator motivator = new Motivator();
                         motivator.GoalId = result.GoalId;
                         motivator.MotivatorText = mantra;
-                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        motivator.MotivatorName = MotivatorTypes.Image.ToString();
                         var r = await MotivatorService.CreateMotivator(motivator);
                     }
 
@@ -343,7 +340,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                         Motivator motivator = new Motivator();
                         motivator.GoalId = result.GoalId;
                         motivator.MotivatorText = prize;
-                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                        motivator.MotivatorName = MotivatorTypes.Prize.ToString();
                         var r = await MotivatorService.CreateMotivator(motivator);
                     }
                 }
