@@ -18,6 +18,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Inject]
         public IStepService StepService { get; set; }
 
+        [Inject]
+        public IMotivatorService MotivatorService { get; set; }
+
         [Parameter]
         public int GoalId { get; set; }
 
@@ -26,6 +29,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected bool editGoalToggler = false;
         protected Goal goal = new Goal();
         protected List<StepViewModel> steps = new List<StepViewModel>();
+        protected List<MotivatorViewModel> motivators = new List<MotivatorViewModel>();
         protected bool saveEditLoader = false;
 
 
@@ -47,16 +51,31 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected override async Task OnInitializedAsync()
         {
             goal = await GoalService.GetGoal(GoalId);
-            IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
-
-            int i = 0;
-            foreach(var s in stepsI)
+            
+            if (goal.HasListOfSteps)
             {
-                StepViewModel stepModel = new StepViewModel();
-                stepModel.Step = s;
-                stepModel.StepListId = i;
-                steps.Add(stepModel);
-                i++;
+                IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
+                int i = 0;
+
+                foreach (var s in stepsI)
+                {
+                    StepViewModel stepModel = new StepViewModel();
+                    stepModel.Step = s;
+                    stepModel.StepListId = i;
+                    steps.Add(stepModel);
+                    i++;
+                }
+            }
+
+            if (goal.HasMotivator)
+            {
+                IEnumerable<Motivator> motivatorsI = await MotivatorService.GetMotivatorsOfGoal(GoalId);
+                
+                foreach(var m in motivatorsI)
+                {
+                    MotivatorViewModel model = new MotivatorViewModel(m);
+                    motivators.Add(model);
+                }
             }
         }
 
@@ -70,7 +89,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
             saveChangesLoader = false;
         }
-
 
         protected void ChangeStepComplition(int stepId)
         {
