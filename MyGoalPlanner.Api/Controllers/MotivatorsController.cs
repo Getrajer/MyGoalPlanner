@@ -78,5 +78,27 @@ namespace MyGoalPlanner.Api.Controllers
                                   "Error updating data");
             }
         }
+        
+        [HttpDelete("{motivatorId:int}")]
+        public async Task<ActionResult<Motivator>> DeleteMotivator(int motivatorId)
+        {
+            try
+            {
+                var motivatiorToDelete = await motivatorRepository.GetMotivator(motivatorId);
+
+                if (motivatiorToDelete == null)
+                {
+                    return NotFound($"Motivator with Id = {motivatorId} not found");
+                }
+
+                return await motivatorRepository.DeleteMotivator(motivatorId);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                                 "Error deleting data");
+            }
+        }
+        
     }
 }

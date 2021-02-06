@@ -13,6 +13,6 @@ namespace MyGoalPlanner.Api.Models
         Task<Step> AddStep(Step step);
         Task<Step> UpdateStep(Step step);
         Task<IEnumerable<Step>> GetAllStepsOfGoalId(int GoalId); 
-        void DeleteStep(int stepId);
+        Task<Step> DeleteStep(int stepId);
     }
 }

@@ -13,6 +13,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
     public class ViewGoalBase : ComponentBase
     {
         [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         public IGoalService GoalService { get; set; }
 
         [Inject]
@@ -20,6 +23,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         [Inject]
         public IMotivatorService MotivatorService { get; set; }
+
 
         [Parameter]
         public int GoalId { get; set; }
@@ -52,19 +56,16 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         {
             goal = await GoalService.GetGoal(GoalId);
             
-            if (goal.HasListOfSteps)
-            {
-                IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
-                int i = 0;
+            IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
+            int i = 0;
 
-                foreach (var s in stepsI)
-                {
-                    StepViewModel stepModel = new StepViewModel();
-                    stepModel.Step = s;
-                    stepModel.StepListId = i;
-                    steps.Add(stepModel);
-                    i++;
-                }
+            foreach (var s in stepsI)
+            {
+                StepViewModel stepModel = new StepViewModel();
+                stepModel.Step = s;
+                stepModel.StepListId = i;
+                steps.Add(stepModel);
+                i++;
             }
 
             if (goal.HasMotivator)
@@ -201,5 +202,24 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
 
         }
+
+
+        public async Task DeleteGoal()
+        {
+            await GoalService.DeleteGoal(GoalId);
+           
+            for(int i = 0; i < steps.Count; i++)
+            {
+                var r = StepService.DeleteStep(steps[i].Step.StepId);
+            }
+
+            for(int i = 0; i < motivators.Count; i++)
+            {
+                var r = MotivatorService.DeleteMotivator(motivators[i].Motivator.MotivatorId);
+            }
+
+            NavigationManager.NavigateTo("/ListOfGoals");
+        }
+        
     }
 }

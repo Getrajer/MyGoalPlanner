@@ -11,6 +11,6 @@ namespace MyGoalPlanner.Web.Services
         Task<IEnumerable<Motivator>> GetMotivatorsOfGoal(int goalId);
         Task<Motivator> CreateMotivator(Motivator newMotivator);
         Task<Motivator> EditMotivator(Motivator editedMotivator);
-        Task DeleteMotivator(int motivatorId, int goalId);
+        Task DeleteMotivator(int motivatorId);
     }
 }

@@ -23,7 +23,7 @@ namespace MyGoalPlanner.Api.Models
             return result.Entity;
         }
 
-        public async void DeleteMotivator(int motivatorId)
+        public async Task<Motivator> DeleteMotivator(int motivatorId)
         {
             var result = await appDbContext.Motivators
                 .FirstOrDefaultAsync(e => e.MotivatorId == motivatorId);
@@ -32,7 +32,10 @@ namespace MyGoalPlanner.Api.Models
             {
                 appDbContext.Motivators.Remove(result);
                 await appDbContext.SaveChangesAsync();
+                return result;
             }
+
+            return result;
         }
 
         public async Task<IEnumerable<Motivator>> GetAllMotivatorsOfGoal(int goalId)

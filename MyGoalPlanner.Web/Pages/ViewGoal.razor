@@ -1,4 +1,4 @@
-﻿@page  "/GoalDetails"
+﻿@page "/GoalDetails"
 @page "/GoalDetails/{GoalId:int}"
 
 @inherits ViewGoalBase
@@ -80,6 +80,10 @@
                         {
                             <div class="loader"></div>
                         }
+
+                        <button @onclick="DeleteGoal">
+                            Delete
+                        </button>
 
                     </div>
                 </div>

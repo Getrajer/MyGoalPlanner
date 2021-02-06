@@ -12,6 +12,6 @@ namespace MyGoalPlanner.Api.Models
         Task<Motivator> GetMotivator(int motivatorId);
         Task<Motivator> AddMotivator(Motivator motivator);
         Task<Motivator> UpdateMotivator(Motivator motivator);
-        void DeleteMotivator(int motivatorId);
+        Task<Motivator> DeleteMotivator(int motivatorId);
     }
 }

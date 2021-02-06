@@ -38,9 +38,9 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.GetJsonAsync<Step>($"api/Steps/{id}");
         }
 
-        public async Task DeleteStep(int stepId, int goalId)
+        public async Task DeleteStep(int stepId)
         {
-            await httpClient.DeleteAsync($"api/Steps/{goalId}/{stepId}");
+            await httpClient.DeleteAsync($"api/Steps/{stepId}");
         }
     }
 }

@@ -115,20 +115,27 @@ namespace MyGoalPlanner.Api.Controllers
                     "Error geting data from the database");
             }
         }
-
-        [HttpDelete]
-        public async Task<ActionResult<Step>> DeleteStep(int id)
+       
+        [HttpDelete("{stepId:int}")]
+        public async Task<ActionResult<Step>> DeleteStep(int stepId)
         {
             try
             {
-                return null;
+                var stepToDelete = await stepRepostitory.GetStep(stepId);
+
+                if(stepToDelete == null)
+                {
+                    return NotFound($"Step with Id = {stepId} not found");
+                }
+
+                return await stepRepostitory.DeleteStep(stepId);
             }
             catch (Exception)
             {
-
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                                 "Error deleting data");
             }
         }
-
+        
     }
 }

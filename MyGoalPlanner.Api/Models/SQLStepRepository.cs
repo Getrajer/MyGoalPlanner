@@ -23,7 +23,7 @@ namespace MyGoalPlanner.Api.Models
             return result.Entity;
         }
 
-        public async void DeleteStep(int stepId)
+        public async Task<Step> DeleteStep(int stepId)
         {
             var result = await appDbContext.Steps
                 .FirstOrDefaultAsync(e => e.StepId == stepId);
@@ -32,7 +32,11 @@ namespace MyGoalPlanner.Api.Models
             {
                 appDbContext.Steps.Remove(result);
                 await appDbContext.SaveChangesAsync();
+                return result;
             }
+
+            return result;
+
         }
 
         public async Task<IEnumerable<Step>> GetAllStepsOfGoalId(int GoalId)
