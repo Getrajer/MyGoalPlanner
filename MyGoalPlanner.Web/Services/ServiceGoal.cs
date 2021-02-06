@@ -22,9 +22,14 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.PostJsonAsync<Goal>("api/Goals", newGoal);
         }
 
-        public async Task<Goal> GetGoal(int id)
+        public async Task DeleteGoal(int goalId)
         {
-            return await httpClient.GetJsonAsync<Goal>($"api/Goals/{id}");
+            await httpClient.DeleteAsync($"api/Goals/{goalId}");
+        }
+
+        public async Task<Goal> GetGoal(int goalId)
+        {
+            return await httpClient.GetJsonAsync<Goal>($"api/Goals/{goalId}");
         }
 
         public async Task<IEnumerable<Goal>> GetGoals()

@@ -22,6 +22,11 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.PostJsonAsync<Motivator>("api/Motivators", newMotivator);
         }
 
+        public async Task DeleteMotivator(int motivatorId, int goalId)
+        {
+            await httpClient.DeleteAsync($"api/Steps/{goalId}/{motivatorId}");
+        }
+
         public async Task<Motivator> EditMotivator(Motivator editedMotivator)
         {
             return await httpClient.PutJsonAsync<Motivator>($"api/Motivators", editedMotivator);

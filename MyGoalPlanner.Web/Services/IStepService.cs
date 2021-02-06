@@ -12,6 +12,6 @@ namespace MyGoalPlanner.Web.Services
         Task<IEnumerable<Step>> GetStepsOfGoalId(int id);
         Task<Step> UpdateStep(Step step);
         Task<Step> GetStep(int id);
-        Task<Step> DeleteStep(int id);
+        Task DeleteStep(int stepId, int goalId);
     }
 }
