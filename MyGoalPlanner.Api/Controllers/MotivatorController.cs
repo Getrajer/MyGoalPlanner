@@ -22,7 +22,7 @@ namespace MyGoalPlanner.Api.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Motivator>> CreateGoal(Motivator motivator)
+        public async Task<ActionResult<Motivator>> CreateMotivator(Motivator motivator)
         {
             try
             {
@@ -57,6 +57,25 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<ActionResult<Motivator>> UpdateMotivator(Motivator updateMotivator)
+        {
+            try
+            {
+                var motivatorToUpdate = await motivatorRepository.GetMotivator(updateMotivator.MotivatorId);
 
+                if (motivatorToUpdate == null) 
+                {
+                    return NotFound($"Motivator with Id = {updateMotivator.GoalId} not found");
+                }
+
+                return await motivatorRepository.UpdateMotivator(updateMotivator);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  "Error updating data");
+            }
+        }
     }
 }

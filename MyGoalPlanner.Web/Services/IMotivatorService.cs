@@ -8,7 +8,7 @@ namespace MyGoalPlanner.Web.Services
 {
     public interface IMotivatorService
     {
-        Task<Motivator> GetMotivatorsOfGoal(int goalId);
+        Task<IEnumerable<Motivator>> GetMotivatorsOfGoal(int goalId);
         Task<Motivator> CreateMotivator(Motivator newMotivator);
         Task<Motivator> EditMotivator(Motivator editedMotivator);
     }

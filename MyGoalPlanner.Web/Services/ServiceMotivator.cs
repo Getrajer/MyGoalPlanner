@@ -22,14 +22,14 @@ namespace MyGoalPlanner.Web.Services
             return await httpClient.PostJsonAsync<Motivator>("api/Motivator", newMotivator);
         }
 
-        public Task<Motivator> EditMotivator(Motivator editedMotivator)
+        public async Task<Motivator> EditMotivator(Motivator editedMotivator)
         {
-            throw new NotImplementedException();
+            return await httpClient.PutJsonAsync<Motivator>($"api/Motivator", editedMotivator);
         }
 
-        public Task<Motivator> GetMotivatorsOfGoal(int goalId)
+        public async Task<IEnumerable<Motivator>> GetMotivatorsOfGoal(int goalId)
         {
-            throw new NotImplementedException();
+            return await httpClient.GetJsonAsync<Motivator[]>($"api/Motivator");
         }
     }
 }
