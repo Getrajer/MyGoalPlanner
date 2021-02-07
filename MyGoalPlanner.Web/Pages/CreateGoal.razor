@@ -1,5 +1,6 @@
-﻿@page "/"
+﻿@page "/CreateGoal"
 @inherits CreateGoalBase
+@using Blazored.TextEditor
 
 <head>
     <link rel="stylesheet" href="../css/add_goal_style.css" />
@@ -64,11 +65,60 @@
 
 
 
-                    <div class="form_box">
-                        <label>Note</label>
-                        <textarea></textarea>
-                        <p class="error"></p>
+                <div class="form_box">
+                    <label>Note</label>
+                    <BlazoredTextEditor @ref="@QuillHtml">
+                        <ToolbarContent>
+                            <select class="ql-header">
+                                <option selected=""></option>
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                            </select>
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color"></select>
+                                <select class="ql-background"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link"></button>
+                            </span>
+                        </ToolbarContent>
+                        <EditorContent>
+                            <h4>This Toolbar works with HTML</h4>
+                            <a href="http://BlazorHelpWebsite.com">
+                                BlazorHelpWebsite.com
+                            </a>
+                        </EditorContent>
+                    </BlazoredTextEditor>
+                    <br />
+                    <button class="btn btn-primary"
+                            @onclick="GetHTML">
+                        Get HTML
+                    </button>
+                    <button class="btn btn-primary"
+                            @onclick="SetHTML">
+                        Set HTML
+                    </button>
+                    <br />
+                    <div>
+                        <br />
+                        @((MarkupString)QuillHTMLContent)
+                        @QuillHTMLContent
                     </div>
+                    <p class="error"></p>
+                </div>
 
                     <div class="form_box">
                         <label>Has motivator</label>
@@ -163,7 +213,7 @@
                     {
                         <div class="list_of_steps">
 
-                            @foreach(var step in ListOfSteps)
+                            @foreach (var step in ListOfSteps)
                             {
                                 <div class="step">
                                     <div class="form_box">
@@ -202,10 +252,12 @@
         }
 
     </div>
-}else{
+}
+else
+{
 
     <div class="spinner-border">
 
     </div>
 
-    }
+}

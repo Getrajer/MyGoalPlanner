@@ -37,6 +37,7 @@ namespace MyGoalPlanner.Api
             services.AddScoped<INoteRepository, SQLNoteRepository>();
             services.AddScoped<IStepRepostitory, SQLStepRepository>();
             services.AddScoped<ITypeOfGoalRepository, SQLTypeOfGoalRepository>();
+            services.AddScoped<IActivityRepository, SQLActivityRepository>();
             services.AddControllers();
         }
 

@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/css/goal_details_style.css",
     "inputFile": "wwwroot/css/goal_details_style.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main_style.css",
+    "inputFile": "wwwroot/css/main_style.scss"
   }
 ]

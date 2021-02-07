@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.TextEditor;
+using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
 using MyGoalPlanner.Models.Enum;
 using MyGoalPlanner.Models.Models;
@@ -24,6 +25,8 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         public IEnumerable<Goal> Goals { get; set; }
 
+        protected BlazoredTextEditor QuillHtml;
+        protected string QuillHTMLContent;
 
         #region Form_Input_Variables
 
@@ -287,6 +290,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 goal.Description = goalDescription;
                 goal.TimeStart = timeStartOfTheGoal;
                 goal.TimeEnd = timeEndOfTheGoal;
+                
 
                 if (IfHasMotivator) goal.HasMotivator = true;
                 if (IfHasListOfSteps) goal.HasListOfSteps = true;
@@ -383,5 +387,22 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         #endregion
 
+
+
+        public async void GetHTML()
+        {
+            QuillHTMLContent = await this.QuillHtml.GetHTML();
+            StateHasChanged();
+        }
+
+        public async void SetHTML()
+        {
+            string QuillContent =
+                @"<a href='http://BlazorHelpWebsite.com/'>" +
+                "<img src='images/BlazorHelpWebsite.gif' /></a>";
+
+            await this.QuillHtml.LoadHTMLContent(QuillContent);
+            StateHasChanged();
+        }
     }
 }

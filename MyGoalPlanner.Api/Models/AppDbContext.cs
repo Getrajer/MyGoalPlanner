@@ -24,6 +24,8 @@ namespace MyGoalPlanner.Api.Models
         public DbSet<Goal> Goals { get; set; }
         public DbSet<FontAwesomeIcon> FontAwesomeIcons { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
