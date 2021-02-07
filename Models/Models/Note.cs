@@ -9,6 +9,8 @@ namespace MyGoalPlanner.Models.Models
     {
         public int NoteId { get; set; }
 
+        public int ActionId { get; set; }
+
         [StringLength(5000)]
         public string NoteText { get; set; }
 
