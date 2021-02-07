@@ -23,7 +23,7 @@ namespace MyGoalPlanner.Api.Models
             return result.Entity;
         }
 
-        public async void DeleteNote(int noteId)
+        public async Task<Note> DeleteNote(int noteId)
         {
             var result = await appDbContext.Notes
                 .FirstOrDefaultAsync(e => e.NoteId == noteId);
@@ -32,7 +32,10 @@ namespace MyGoalPlanner.Api.Models
             {
                 appDbContext.Notes.Remove(result);
                 await appDbContext.SaveChangesAsync();
+                return result;
             }
+
+            return result;
         }
 
         public async Task<IEnumerable<Note>> GetAllNotes()

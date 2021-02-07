@@ -12,6 +12,6 @@ namespace MyGoalPlanner.Api.Models
         Task<Note> GetNote(int noteId);
         Task<Note> AddNote(Note note);
         Task<Note> UpdateNote(Note note);
-        void DeleteNote(int noteId);
+        Task<Note> DeleteNote(int noteId);
     }
 }

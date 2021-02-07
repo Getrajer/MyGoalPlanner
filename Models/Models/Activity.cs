@@ -8,6 +8,8 @@ namespace MyGoalPlanner.Models.Models
     {
         public int ActivityId { get; set; }
         public string ActivityType { get; set; }
-        public int ActivityTypeId { get; set; }
+
+        public string ActivityConnection { get; set; }
+        public int ActivityConnectionId { get; set; }
     }
 }
