@@ -57,12 +57,12 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Goal>> GetGoal(int id)
+        [HttpGet("{goalId:int}")]
+        public async Task<ActionResult<Goal>> GetGoal(int goalId)
         {
             try
             {
-                var result = await goalRepository.GetGoal(id);
+                var result = await goalRepository.GetGoal(goalId);
 
                 if(result == null)
                 {
@@ -100,19 +100,19 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Goal>> DeleteGoal(int id)
+        [HttpDelete("{goalId:int}")]
+        public async Task<ActionResult<Goal>> DeleteGoal(int goalId)
         {
             try
             {
-                var goalToDelete = await goalRepository.GetGoal(id);
+                var goalToDelete = await goalRepository.GetGoal(goalId);
 
                 if(goalToDelete == null)
                 {
-                    return NotFound($"Goal with Id = {id} not found");
+                    return NotFound($"Goal with Id = {goalId} not found");
                 }
 
-                return await goalRepository.DeleteGoal(id);
+                return await goalRepository.DeleteGoal(goalId);
 
             }
             catch (Exception)
