@@ -296,6 +296,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 if (IfHasListOfSteps) goal.HasListOfSteps = true;
 
                 var result = await GoalService.CreateGoal(goal);
+
                 
                 if (IfHasListOfSteps)
                 {
@@ -309,6 +310,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                         var r = await StepService.CreateStep(step);
                     }
                 }
+
                 
                 if (IfHasMotivator)
                 {

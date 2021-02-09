@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Web.Mvc;
 
 namespace MyGoalPlanner.Models.Models
 {
@@ -11,7 +12,7 @@ namespace MyGoalPlanner.Models.Models
 
         public int ActionId { get; set; }
 
-        [StringLength(5000)]
+        [AllowHtml]
         public string NoteText { get; set; }
 
     }
