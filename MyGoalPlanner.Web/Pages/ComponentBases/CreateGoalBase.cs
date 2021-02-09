@@ -23,10 +23,15 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Inject]
         public IMotivatorService MotivatorService { get; set; }
 
+        [Inject]
+        public INoteService NoteService { get; set; }
+
         public IEnumerable<Goal> Goals { get; set; }
+        //Test data
+        public IEnumerable<Note> Notes { get; set; }
+        public List<MarkupString> NotesHtml { get; set; }
 
         protected BlazoredTextEditor QuillHtml;
-        protected string QuillHTMLContent;
 
         #region Form_Input_Variables
 
@@ -182,7 +187,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         {
             timeEndOfTheGoal = DateTime.UtcNow;
             timeStartOfTheGoal = DateTime.UtcNow;
+            Notes = await NoteService.GetNotes();
+            NotesHtml = new List<MarkupString>();
 
+            foreach(var note in Notes)
+            {
+                NotesHtml.Add((MarkupString)note.NoteText);
+            }
 
             minStartDate = DateTime.UtcNow.ToString("s");
 
@@ -297,7 +308,15 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
                 var result = await GoalService.CreateGoal(goal);
 
-                
+                string noteText = await this.QuillHtml.GetHTML();
+
+                if(noteText != "" || noteText == null)
+                {
+                    Note newNote = new Note();
+                    newNote.NoteText = noteText;
+                    var r = await NoteService.CreateNote(newNote);
+                }
+
                 if (IfHasListOfSteps)
                 {
                     for (int i = 0; i < ListOfSteps.Count; i++)
@@ -388,23 +407,5 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         }
 
         #endregion
-
-
-
-        public async void GetHTML()
-        {
-            QuillHTMLContent = await this.QuillHtml.GetHTML();
-            StateHasChanged();
-        }
-
-        public async void SetHTML()
-        {
-            string QuillContent =
-                @"<a href='http://BlazorHelpWebsite.com/'>" +
-                "<img src='images/BlazorHelpWebsite.gif' /></a>";
-
-            await this.QuillHtml.LoadHTMLContent(QuillContent);
-            StateHasChanged();
-        }
     }
 }

@@ -24,7 +24,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Inject]
         public IMotivatorService MotivatorService { get; set; }
 
-
         [Parameter]
         public int GoalId { get; set; }
 

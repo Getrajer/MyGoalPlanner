@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyGoalPlanner.Web.Services
 {
-    public class NoteService : INoteService
+    public class ServiceNote : INoteService
     {
         private readonly HttpClient httpClient;
 
-        public NoteService(HttpClient httpClient)
+        public ServiceNote(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }

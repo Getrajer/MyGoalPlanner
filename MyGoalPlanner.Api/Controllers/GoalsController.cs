@@ -47,7 +47,7 @@ namespace MyGoalPlanner.Api.Controllers
                 {
                     var createdGoal = await goalRepository.AddGoal(goal);
 
-                    return CreatedAtAction(nameof(GetGoal), new { id = createdGoal.GoalId }, createdGoal);
+                    return createdGoal;
                 }
             }
             catch (Exception)

@@ -106,5 +106,19 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetNotes()
+        {
+            try
+            {
+                return Ok(await noteRepository.GetAllNotes());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                    "Error geting data from the database");
+            }
+        }
+
     }
 }
