@@ -24,6 +24,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         public IMotivatorService MotivatorService { get; set; }
 
         [Inject]
+        public IActivityService ActivityService { get; set; }
+
+        [Inject]
         public INoteService NoteService { get; set; }
 
         public IEnumerable<Goal> Goals { get; set; }
@@ -308,73 +311,85 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
                 var result = await GoalService.CreateGoal(goal);
 
-                string noteText = await this.QuillHtml.GetHTML();
-
-                if(noteText != "" || noteText == null)
+                if(result != null)
                 {
-                    Note newNote = new Note();
-                    newNote.NoteText = noteText;
-                    var r = await NoteService.CreateNote(newNote);
+                    Activity activity = new Activity();
+                    activity.ActivityConnectionId = result.GoalId;
+                    activity.ActivityConnection = "Goal";
+                    activity.ActivityType = "Note";
+
+                    var activityResult = await ActivityService.CreateActivity(activity);
+
+                    string noteText = await this.QuillHtml.GetHTML();
+
+                    if (noteText != "" || noteText == null)
+                    {
+                        Note newNote = new Note();
+                        newNote.NoteText = noteText;
+                        newNote.ActionId = activityResult.ActivityId;
+                        var r = await NoteService.CreateNote(newNote);
+                    }
+
+                    if (IfHasListOfSteps)
+                    {
+                        for (int i = 0; i < ListOfSteps.Count; i++)
+                        {
+                            Step step = new Step();
+                            step.GoalId = result.GoalId;
+                            step.StepName = ListOfSteps[i].StepName;
+                            step.StepNumber = i + 1;
+
+                            var r = await StepService.CreateStep(step);
+                        }
+                    }
+
+                    if (IfHasMotivator)
+                    {
+                        if (IfHasVideoMotivator)
+                        {
+                            Motivator motivator = new Motivator();
+                            motivator.GoalId = result.GoalId;
+                            motivator.MotivatorLink = linkToVideoMotivator;
+                            motivator.MotivatorName = MotivatorTypes.Video.ToString();
+                            var r = await MotivatorService.CreateMotivator(motivator);
+                        }
+
+                        if (IfHasMantraMotivator)
+                        {
+                            Motivator motivator = new Motivator();
+                            motivator.GoalId = result.GoalId;
+                            motivator.MotivatorLink = linkToImage;
+                            motivator.MotivatorName = MotivatorTypes.Mantra.ToString();
+                            var r = await MotivatorService.CreateMotivator(motivator);
+                        }
+
+                        if (IfHasImageMotivator)
+                        {
+                            Motivator motivator = new Motivator();
+                            motivator.GoalId = result.GoalId;
+                            motivator.MotivatorText = mantra;
+                            motivator.MotivatorName = MotivatorTypes.Image.ToString();
+                            var r = await MotivatorService.CreateMotivator(motivator);
+                        }
+
+                        if (IfHasPrizeMotivator)
+                        {
+                            Motivator motivator = new Motivator();
+                            motivator.GoalId = result.GoalId;
+                            motivator.MotivatorText = prize;
+                            motivator.MotivatorName = MotivatorTypes.Prize.ToString();
+                            var r = await MotivatorService.CreateMotivator(motivator);
+                        }
+                    }
+
                 }
 
-                if (IfHasListOfSteps)
-                {
-                    for (int i = 0; i < ListOfSteps.Count; i++)
-                    {
-                        Step step = new Step();
-                        step.GoalId = result.GoalId;
-                        step.StepName = ListOfSteps[i].StepName;
-                        step.StepNumber = i + 1;
+                ResetVariables();
 
-                        var r = await StepService.CreateStep(step);
-                    }
-                }
-
-                
-                if (IfHasMotivator)
-                {
-                    if (IfHasVideoMotivator)
-                    {
-                        Motivator motivator = new Motivator();
-                        motivator.GoalId = result.GoalId;
-                        motivator.MotivatorLink = linkToVideoMotivator;
-                        motivator.MotivatorName = MotivatorTypes.Video.ToString();
-                        var r = await MotivatorService.CreateMotivator(motivator);
-                    }
-
-                    if (IfHasMantraMotivator)
-                    {
-                        Motivator motivator = new Motivator();
-                        motivator.GoalId = result.GoalId;
-                        motivator.MotivatorLink = linkToImage;
-                        motivator.MotivatorName = MotivatorTypes.Mantra.ToString();
-                        var r = await MotivatorService.CreateMotivator(motivator);
-                    }
-
-                    if (IfHasImageMotivator)
-                    {
-                        Motivator motivator = new Motivator();
-                        motivator.GoalId = result.GoalId;
-                        motivator.MotivatorText = mantra;
-                        motivator.MotivatorName = MotivatorTypes.Image.ToString();
-                        var r = await MotivatorService.CreateMotivator(motivator);
-                    }
-
-                    if (IfHasPrizeMotivator)
-                    {
-                        Motivator motivator = new Motivator();
-                        motivator.GoalId = result.GoalId;
-                        motivator.MotivatorText = prize;
-                        motivator.MotivatorName = MotivatorTypes.Prize.ToString();
-                        var r = await MotivatorService.CreateMotivator(motivator);
-                    }
-                }
-
+                await LoadGoals();
             }
 
-            ResetVariables();
-
-            await LoadGoals();
+               
         }
 
 
