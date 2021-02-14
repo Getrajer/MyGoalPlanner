@@ -86,5 +86,19 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
+        [HttpGet("GetActivitiesByGoalId/{goalId}")]
+        public async Task<ActionResult<List<Activity>>> GetActivitiesOfGoalId(int goalId)
+        {
+            try
+            {
+                return Ok(await activityRepository.GetActivitiesByGoalId(goalId));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error geting data from the database");
+            }
+        }
+
     }
 }

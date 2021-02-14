@@ -38,10 +38,17 @@ namespace MyGoalPlanner.Api.Models
             return null;
         }
 
+        public Task<List<Activity>> GetActivitiesByGoalId(int goalId)
+        {
+            return (Task<List<Activity>>)appDbContext.Steps.Where(s => s.GoalId == goalId);
+        }
+
         public async Task<Activity> GetActivity(int activityId)
         {
             return await appDbContext.Activities
                 .FirstOrDefaultAsync(a => a.ActivityId == activityId);
         }
+
+        
     }
 }

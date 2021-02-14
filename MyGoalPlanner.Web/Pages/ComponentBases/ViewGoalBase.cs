@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.TextEditor;
+using Microsoft.AspNetCore.Components;
 using MyGoalPlanner.Models;
 using MyGoalPlanner.Models.Models;
 using MyGoalPlanner.Models.ViewModels;
@@ -24,6 +25,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         [Inject]
         public IMotivatorService MotivatorService { get; set; }
 
+        [Inject]
+        public IActivityService ActivityService { get; set; }
+
         [Parameter]
         public int GoalId { get; set; }
 
@@ -33,7 +37,9 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected Goal goal = new Goal();
         protected List<StepViewModel> steps = new List<StepViewModel>();
         protected List<MotivatorViewModel> motivators = new List<MotivatorViewModel>();
+        protected List<Activity> activities = new List<Activity>();
         protected bool saveEditLoader = false;
+        protected BlazoredTextEditor QuillHtml;
 
 
         #region Form_Error_Variables
