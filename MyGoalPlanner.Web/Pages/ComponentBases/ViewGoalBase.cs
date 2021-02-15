@@ -64,6 +64,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
             int i = 0;
 
+
             foreach (var s in stepsI)
             {
                 StepViewModel stepModel = new StepViewModel();
