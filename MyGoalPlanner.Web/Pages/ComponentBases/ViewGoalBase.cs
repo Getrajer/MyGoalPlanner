@@ -37,7 +37,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected Goal goal = new Goal();
         protected List<StepViewModel> steps = new List<StepViewModel>();
         protected List<MotivatorViewModel> motivators = new List<MotivatorViewModel>();
-        protected List<Activity> activities = new List<Activity>();
         protected bool saveEditLoader = false;
         protected BlazoredTextEditor QuillHtml;
 
@@ -60,10 +59,13 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected override async Task OnInitializedAsync()
         {
             goal = await GoalService.GetGoal(GoalId);
+
+            IEnumerable<Activity> activitiesI = await ActivityService.GetActivitiesOfGoalId(GoalId);
+
+            
             
             IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
             int i = 0;
-
 
             foreach (var s in stepsI)
             {
@@ -73,6 +75,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 steps.Add(stepModel);
                 i++;
             }
+
 
             if (goal.HasMotivator)
             {

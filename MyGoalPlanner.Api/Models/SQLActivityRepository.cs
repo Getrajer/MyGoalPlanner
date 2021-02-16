@@ -38,9 +38,9 @@ namespace MyGoalPlanner.Api.Models
             return null;
         }
 
-        public Task<List<Activity>> GetActivitiesByGoalId(int goalId)
+        public async Task<IEnumerable<Activity>> GetActivitiesByGoalId(int goalId)
         {
-            return (Task<List<Activity>>)appDbContext.Steps.Where(s => s.GoalId == goalId);
+            return appDbContext.Activities.Where(s => s.ActivityConnectionId == goalId);
         }
 
         public async Task<Activity> GetActivity(int activityId)

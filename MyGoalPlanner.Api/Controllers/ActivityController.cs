@@ -86,7 +86,7 @@ namespace MyGoalPlanner.Api.Controllers
             }
         }
 
-        [HttpGet("GetActivitiesByGoalId/{goalId}")]
+        [HttpGet("GetOfGoalId/{goalId}")]
         public async Task<ActionResult<List<Activity>>> GetActivitiesOfGoalId(int goalId)
         {
             try

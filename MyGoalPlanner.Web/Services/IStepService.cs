@@ -9,7 +9,7 @@ namespace MyGoalPlanner.Web.Services
     public interface IStepService
     {
         Task<Step> CreateStep(Step newStep);
-        Task<IEnumerable<Step>> GetStepsOfGoalId(int id);
+        Task<IEnumerable<Step>> GetStepsOfGoalId(int goalId);
         Task<Step> UpdateStep(Step step);
         Task<Step> GetStep(int id);
         Task DeleteStep(int stepId);

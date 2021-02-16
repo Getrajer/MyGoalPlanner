@@ -11,5 +11,6 @@ namespace MyGoalPlanner.Web.Services
         Task<Activity> GetActivity(int activityId);
         Task<Activity> CreateActivity(Activity newActivity);
         Task DeleteActivity(int activityId);
+        Task<IEnumerable<Activity>> GetActivitiesOfGoalId(int goalId);
     }
 }

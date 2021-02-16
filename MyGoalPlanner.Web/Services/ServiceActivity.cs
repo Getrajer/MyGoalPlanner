@@ -27,6 +27,11 @@ namespace MyGoalPlanner.Web.Services
             await httpClient.DeleteAsync($"api/Activity/{activityId}");
         }
 
+        public async Task<IEnumerable<Activity>> GetActivitiesOfGoalId(int goalId)
+        {
+            return await httpClient.GetJsonAsync<Activity[]>($"api/Activity/GetOfGoalId/{goalId}");
+        }
+
         public async Task<Activity> GetActivity(int activityId)
         {
             return await httpClient.GetJsonAsync<Activity>($"api/Activity/{activityId}");
