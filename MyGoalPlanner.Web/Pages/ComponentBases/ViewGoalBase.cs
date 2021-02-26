@@ -38,8 +38,7 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
         protected List<StepViewModel> steps = new List<StepViewModel>();
         protected List<MotivatorViewModel> motivators = new List<MotivatorViewModel>();
         protected bool saveEditLoader = false;
-        protected BlazoredTextEditor QuillHtml;
-
+        protected List<BlazoredTextEditor> GoalNotes;
 
         #region Form_Error_Variables
 
@@ -55,15 +54,18 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
 
         #endregion
 
-
         protected override async Task OnInitializedAsync()
         {
             goal = await GoalService.GetGoal(GoalId);
 
-            IEnumerable<Activity> activitiesI = await ActivityService.GetActivitiesOfGoalId(GoalId);
+            IEnumerable<Activity> goalActivities = await ActivityService.GetActivitiesOfGoalId(GoalId);
 
-            
-            
+            //Get Notes for the goal
+            foreach(var activity in goalActivities)
+            {
+                
+            }
+
             IEnumerable<Step> stepsI = await StepService.GetStepsOfGoalId(GoalId);
             int i = 0;
 
@@ -75,7 +77,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
                 steps.Add(stepModel);
                 i++;
             }
-
 
             if (goal.HasMotivator)
             {
@@ -163,7 +164,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
         }
 
-
         public async Task UpdateGoal()
         {
             bool errorOccured = false;
@@ -211,7 +211,6 @@ namespace MyGoalPlanner.Web.Pages.ComponentBases
             }
 
         }
-
 
         public async Task DeleteGoal()
         {
